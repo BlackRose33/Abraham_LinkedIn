@@ -11,6 +11,7 @@ var PortNum = 3001
 
 // LoadEnvironmentSettings loads settings from environment variables
 func LoadEnvironmentSettings() {
+	loadIntSetting(&PortNum, "AB_LI_PORT")
 }
 
 func loadBooleanSetting(setting *bool, envKey string) {
