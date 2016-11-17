@@ -3,16 +3,15 @@
 {{end}}
 
 {{define "body"}}
-  <div style="height: 300px; width: 300px; position: relative;">
-    <img style="position: absolute; height: 300px; width: 300px; opacity: {{.Data.Bronx}}"
-      src="/img/heat_bronx.png" />
-    <img style="position: absolute; height: 300px; width: 300px; opacity: {{.Data.Brooklyn}}"
-      src="/img/heat_brooklyn.png" />
-    <img style="position: absolute; height: 300px; width: 300px; opacity: {{.Data.Manhattan}}"
-      src="/img/heat_manhattan.png" />
-    <img style="position: absolute; height: 300px; width: 300px; opacity: {{.Data.Queens}}"
-      src="/img/heat_queens.png" />
-    <img style="position: absolute; height: 300px; width: 300px; opacity: {{.Data.StatenIsland}}"
-      src="/img/heat_staten_island.png" />
+  <div class="heatmap">
+    <img style="opacity: {{.Data.Bronx}}" src="/img/heat_bronx.png" />
+    <img style="opacity: {{.Data.Brooklyn}}" src="/img/heat_brooklyn.png" />
+    <img style="opacity: {{.Data.Manhattan}}" src="/img/heat_manhattan.png" />
+    <img style="opacity: {{.Data.Queens}}" src="/img/heat_queens.png" />
+    <img style="opacity: {{.Data.StatenIsland}}" src="/img/heat_staten_island.png" />
   </div>
+{{end}}
+
+{{define "includes"}}
+<link rel="stylesheet" type="text/css" href="/css/heatmap.css" />
 {{end}}
