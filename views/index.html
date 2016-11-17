@@ -4,6 +4,10 @@ Campaign Finances
 
 {{define "body"}}
 <section class="padded">
-  Hello, world!
+  {{if .Data.Candidate}}
+    The candidate is {{.Data.Candidate.FirstName}} {{.Data.Candidate.LastName}}
+  {{else}}
+    Oops, didn't find that candidate!!! :/
+  {{end}}
 </section>
 {{end}}

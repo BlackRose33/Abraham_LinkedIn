@@ -3,11 +3,12 @@
 <html>
   <head>
     <title>
-      {{template "title"}}
+      {{template "title" .}}
     </title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
   </head>
   <body>
-    {{template "body"}}
+    {{template "body" .}}
   </body>
 </html>
 {{end}}

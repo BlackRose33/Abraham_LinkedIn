@@ -12,6 +12,8 @@ func GetTemplates() map[string]*template.Template {
 
 	templates["home#index"] = loadTemplate("views/index.html")
 
+	templates["borough#contribheat"] = loadTemplate("views/borough/contribheat.html")
+
 	return templates
 }
 

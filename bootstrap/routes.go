@@ -14,6 +14,8 @@ func CreateRoutes() {
 	resources.MapJSHandler()
 
 	http.Handle(route("/", controllers.Home))
+
+	http.Handle(route("/borough/heat/contrib/", controllers.BoroughHeatmapContribCandid))
 }
 
 // Quick wrapper for StripPrefix which prevents typos
