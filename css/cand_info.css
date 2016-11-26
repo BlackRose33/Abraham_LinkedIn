@@ -1,5 +1,5 @@
 ul.cand {
-  color: white;
+  color: cyan;
   height: 43vh;
   width: 25vw;
   margin: 0;
@@ -11,20 +11,19 @@ ul.cand {
 }
 
 ul.cand li:hover {
-    background-color: yellow;
+    background-color: cyan;
 		color: black;
 }
 
 .info{
-  color: orange;
+  color: cyan;
   width: 25vw;
-  height: 43vh;
+  height: 40vh;
 }
 
 .graph{
 	float:left;
-	margin-left: 25vw
-  border: 2px solid white;
+	margin-left: 25vw;
   max-width: 50vw;
   height: 86vh;
 }
@@ -38,13 +37,13 @@ ul.cand li:hover {
 
 table{
 		width: 20vw;
-		color: orange;
-    border: 1px solid white;
+		color: cyan;
+    border: 1px solid cyan;
 		align: center;
 }
 
 th{
-	color: orange;
+	color: cyan;
 	padding: .5em;
 }
 
@@ -62,8 +61,10 @@ td{
 
 .alignleft{
 	float: left;
+	padding-left: .5em;
 }
 
 .alignright{
 	float: right;
+	padding-right: .5em;
 }
