@@ -7,22 +7,23 @@
       {{template "title" .}}
     </title>
     {{block "includes" .}}{{end}}
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">-->
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
   </head>
 
-  <body bgcolor = black>
+  <body>
 
       <div class="header">
           <div class="search">
-              <input type="text" class="text-area" name="inputMessage"><button class="button">search</button>
+              <input type="text" class="text-area" name="inputMessage" />
+              <button class="button">search</button>
           </div>
       </div>
 
-      </div class="container">
+      <div class="container">
         <nav>
           <ul>
-            <li class"active"><a href="home.html">Home</a></li>
+            <li class="active"><a href="home.html">Home</a></li>
             <li><a href="CandInfo.html">Candidate Information</a></li>
             <li><a href="HighSpender.html">Highest Spender</a></li>
             <li><a href="MostPaid.html">Most Paid</a></li>
@@ -36,11 +37,11 @@
         </article>
       </div>
 
+      <footer>
+        <br />Made by Anish Goyal, Brian Wong, Poorva Sampat<br />
+      </footer>
+
   </body>
 
-  <footer>
-  <br>Made by Anish Goyal, Brian Wong, Poorva Sampat</br>
-  </footer>
-  
 </html>
 {{end}}
