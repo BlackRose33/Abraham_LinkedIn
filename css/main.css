@@ -77,17 +77,18 @@ nav {
     float: left;
     color: white;
     max-width: 25vw;
-    height: auto;
+    height: 86vh;
     margin: 0;
     position: absolute;
     overflow: auto;
-		border-right: 1px solid white;
+		border-right: 2px dotted white;
 }
 
 nav ul{
     list-style-type: none;
     line-height: 2;
     padding-left: .5em;
+		padding-right: .5em
 }
 
 nav ul a:link {             /*TODO:this doesnt work properly?*/
