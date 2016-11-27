@@ -25,5 +25,5 @@ func BoroughHeatmapContribCandid(w http.ResponseWriter, r *http.Request) {
 
 	viewData.Data = boroughCounts
 
-	RenderView(w, "borough#contribheat", viewData)
+	RenderView(w, "layouts#Graphs", viewData)
 }

@@ -1,40 +1,45 @@
 ul.cand {
-  color: white;
-  height: 43vh;
-  width: 25vw;
+  color: #CC99CC;
+  height: 38.5vh;
+  width: 24vw;
   margin: 0;
   list-style-type: none;
-  line-height: 1.5;
+  line-height: 2;
   padding-left: .5em;
   text-align: left;
   overflow: auto;
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 16px;
-  line-height: 25px;
 }
 
 ul.cand li:hover {
-    background-color: white;
-		color: black;
+    color: #58cce1;
 }
 
 .info{
-  color: white;
-  width: 25vw;
-  height: 40vh;
+  color: #CC99CC;
+  width: 24vw;
+  height: 38.5vh;
   font-family: 'Vollkorn', Georgia, Times, serif;
-  font-size: 16px;
-  line-height: 25px;
+  font-size: 13px;
+  line-height: 15px;
 }
 
 .graph{
 	float:left;
-	margin-left: 25vw;
-  max-width: 50vw;
-  height: 86vh;
+  width: 43vw;
+  height: 80vh;
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 16px;
   line-height: 25px;
+  color: #CC99CC;
+}
+
+h1{
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 20px;
+  line-height: 25px;
+  color: #CC99CC;
 }
 
 .right{
@@ -45,15 +50,16 @@ ul.cand li:hover {
 }
 
 table.cand_table{
+  margin-top: 60px;
   width: 70%;
   overflow: hidden;
   background: #FFF;
-  color: #0E6655;
+  color: #CC99CC;
   border-radius: 10px;
-  border: 1px solid #0E6655;
+  border: 1px solid #CC99CC;
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 18px;
 }
 
 tr{
@@ -63,12 +69,12 @@ tr{
 th {
   display: none;
   border: 1px solid #FFF;
-  background-color: #0E6655;
+  background-color: #CC99CC;
   color: #FFF;
   padding: .5em;
   font-family: 'Vollkorn', Georgia, Times, serif;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 14px;
   display: table-cell;
   text-align: center;
 }
@@ -82,22 +88,17 @@ td {
 	padding: .5em;
 	position: relative;
   font-family: 'Vollkorn', Georgia, Times, serif;
-  font-size: 14px;
-  line-height: 30px;
+  font-size: 12px;
+  line-height: 14px;
   word-wrap: break-word;
   box-shadow: inset 1px 0 0 #000;
 }
 
 p{
-  color: #167F92;
+  color: #CC99CC;
 }
 
 .alignleft{
 	float: left;
 	padding-left: .5em;
-}
-
-.alignright{
-	float: right;
-	padding-right: .5em;
 }

@@ -1,13 +1,45 @@
 {{define "title"}}
-  District distribution of contributions and spending
+  Contributor Heat Map
 {{end}}
 
 {{define "body"}}
+  <div>
+    <ul class = "cand">
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+      <li>Candidate</li>
+    </ul>
+  </div>
+  <div class="left">
+    <div class="heatmap">
+      <img style="opacity: {{.Data.Bronx}}" src="/img/heat_bronx.png" />
+      <img style="opacity: {{.Data.Brooklyn}}" src="/img/heat_brooklyn.png" />
+      <img style="opacity: {{.Data.Manhattan}}" src="/img/heat_manhattan.png" />
+      <img style="opacity: {{.Data.Queens}}" src="/img/heat_queens.png" />
+      <img style="opacity: {{.Data.StatenIsland}}" src="/img/heat_staten_island.png" />
+    </div>
+  </div>
 {{end}}
 
 {{define "includes"}}
-<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<link rel="stylesheet" type="text/css" href="/css/heatmap.css" />
 <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="jquery-1.8.3.js"></script>
-<script src=""></script>
 {{end}}

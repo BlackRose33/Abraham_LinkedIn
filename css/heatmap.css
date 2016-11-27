@@ -1,4 +1,41 @@
+ul.cand {
+  color: #e38113;
+  height: 80vh;
+  width: 24vw;
+  margin: 0;
+  list-style-type: none;
+  line-height: 2;
+  padding-left: .5em;
+  text-align: left;
+  overflow: auto;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 16px;
+}
+
+ul.cand li:hover {
+    color: #58cce1;
+}
+
+.cand{
+  color: #e38113;
+  float: right;
+  width: 25vw;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.left {
+  float: left;
+  color: #e38113;
+  width: 45vw;
+  height: 80vh;
+}
+
 .heatmap {
+  float:center;
+  vertical-align: middle;
+  color: #e38113;
   height: 300px;
   margin: 2em auto 0;
   position: relative;

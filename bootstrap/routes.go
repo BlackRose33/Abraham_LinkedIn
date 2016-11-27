@@ -18,7 +18,7 @@ func CreateRoutes() {
 	http.Handle(route("/highspender", controllers.HighSpender))
 	http.Handle(route("/mostpaid", controllers.MostPaid))
 	http.Handle(route("/trends", controllers.Trends))
-	http.Handle(route("/borough/heat/contrib/", controllers.BoroughHeatmapContribCandid))
+	http.Handle(route("/graphs/", controllers.BoroughHeatmapContribCandid))
 }
 
 // Quick wrapper for StripPrefix which prevents typos
