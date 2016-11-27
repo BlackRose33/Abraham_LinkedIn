@@ -14,7 +14,10 @@ func CreateRoutes() {
 	resources.MapJSHandler()
 
 	http.Handle(route("/", controllers.Home))
-
+	http.Handle(route("/candinfo/", controllers.CandInfo))
+	http.Handle(route("/highspender", controllers.HighSpender))
+	http.Handle(route("/mostpaid", controllers.MostPaid))
+	http.Handle(route("/trends", controllers.Trends))
 	http.Handle(route("/borough/heat/contrib/", controllers.BoroughHeatmapContribCandid))
 }
 

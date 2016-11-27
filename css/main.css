@@ -5,6 +5,7 @@
 
 body {
   background-color: black;
+	color: orange;
 }
 
 .header {
@@ -33,7 +34,7 @@ footer {
 	display: inline-block;
 	margin: auto;
 	height: 5vh;
-	width: 90%;
+	width: 100%;
 	border-radius: 30px;
 	border: none;
 	font-size: 16px;
@@ -44,28 +45,6 @@ footer {
     -webkit-border-radius: 4px;
        -moz-border-radius: 4px;
             border-radius: 4px;
-}
-.button{
-	display: inline-block;
-	margin-left: 10px;
-	width: 7%;
-	height: 5vh;
-	padding: 5px 5px 5px 5px;
-	font-family: Raleway,"Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
-    font-weight: 800;
-    border: 1px solid #fff;
-    color: #fff;
-    letter-spacing: 2px;
-    background-color: transparent;
-    font-size: 13px;
-    text-align: center;
-    text-transform: uppercase;
-    vertical-align: middle;
-}
-
-.button:hover{
-	background-color: #566573;
-	transition: background-color .25s;
 }
 
 .container{

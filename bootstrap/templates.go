@@ -11,7 +11,10 @@ func GetTemplates() map[string]*template.Template {
 	templates := make(map[string]*template.Template)
 
 	templates["home#index"] = loadTemplate("views/index.html")
-
+	templates["layouts#CandInfo"] = loadTemplate("views/layouts/CandInfo.html")
+	templates["layouts#HighSpender"] = loadTemplate("views/layouts/HighSpender.html")
+	templates["layouts#MostPaid"] = loadTemplate("views/layouts/MostPaid.html")
+	templates["layouts#Trends"] = loadTemplate("views/layouts/Trends.html")
 	templates["borough#contribheat"] = loadTemplate("views/borough/contribheat.html")
 
 	return templates

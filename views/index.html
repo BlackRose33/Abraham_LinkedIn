@@ -1,13 +1,15 @@
 {{define "title"}}
-Campaign Finances
+  Home
 {{end}}
 
 {{define "body"}}
-<section class="padded">
-  {{if .Data.Candidate}}
-    The candidate is {{.Data.Candidate.FirstName}} {{.Data.Candidate.LastName}}
-  {{else}}
-    Oops, didn't find that candidate!!! :/
-  {{end}}
-</section>
+<p class="intro">
+  This is Home!
+</p>
+{{end}}
+
+{{define "includes"}}
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<script type="text/javascript" src="jquery-1.8.3.js"></script>
+<script src=""></script>
 {{end}}
