@@ -1,5 +1,5 @@
 ul.cand {
-  color: #e38113;
+  color: #dd2838;
   height: 80vh;
   width: 24vw;
   margin: 0;
@@ -17,7 +17,7 @@ ul.cand li:hover {
 }
 
 .cand{
-  color: #e38113;
+  color: #dd2838;
   float: right;
   width: 25vw;
   font-family: 'Vollkorn', Georgia, Times, serif;
@@ -27,22 +27,25 @@ ul.cand li:hover {
 
 .left {
   float: left;
-  color: #e38113;
+  vertical-align: middle;
+  color: #dd2838;
   width: 45vw;
   height: 80vh;
 }
 
 .heatmap {
   float:center;
-  vertical-align: middle;
-  color: #e38113;
-  height: 300px;
+  height: 60vh;
+  width: 60vh;
   margin: 2em auto 0;
   position: relative;
-  width: 300px;
+    top: 60%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -240px;;
 }
 
-.heatmap > img {
+.heatmap > img.map {
   height: 100%;
   position: absolute;
   width: 100%;

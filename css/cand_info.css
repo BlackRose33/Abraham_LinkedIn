@@ -1,5 +1,5 @@
 ul.cand {
-  color: #CC99CC;
+  color: #7549B1;
   height: 38.5vh;
   width: 24vw;
   margin: 0;
@@ -17,7 +17,7 @@ ul.cand li:hover {
 }
 
 .info{
-  color: #CC99CC;
+  color: #7549B1;
   width: 24vw;
   height: 38.5vh;
   font-family: 'Vollkorn', Georgia, Times, serif;
@@ -32,14 +32,15 @@ ul.cand li:hover {
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 16px;
   line-height: 25px;
-  color: #CC99CC;
+  color: #7549B1;
 }
 
 h1{
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 20px;
   line-height: 25px;
-  color: #CC99CC;
+  color: #7549B1;
+  text-align:center;
 }
 
 .right{
@@ -50,13 +51,13 @@ h1{
 }
 
 table.cand_table{
-  margin-top: 60px;
+  margin-top: 90px;
   width: 70%;
   overflow: hidden;
   background: #FFF;
-  color: #CC99CC;
+  color: #7549B1;
   border-radius: 10px;
-  border: 1px solid #CC99CC;
+  border: 1px solid #7549B1;
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 14px;
   line-height: 18px;
@@ -69,7 +70,7 @@ tr{
 th {
   display: none;
   border: 1px solid #FFF;
-  background-color: #CC99CC;
+  background-color: #7549B1;
   color: #FFF;
   padding: .5em;
   font-family: 'Vollkorn', Georgia, Times, serif;
@@ -95,7 +96,7 @@ td {
 }
 
 p{
-  color: #CC99CC;
+  color: #7549B1;
 }
 
 .alignleft{
