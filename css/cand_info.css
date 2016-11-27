@@ -1,5 +1,5 @@
 ul.cand {
-  color: cyan;
+  color: white;
   height: 43vh;
   width: 25vw;
   margin: 0;
@@ -8,17 +8,23 @@ ul.cand {
   padding-left: .5em;
   text-align: left;
   overflow: auto;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 16px;
+  line-height: 25px;
 }
 
 ul.cand li:hover {
-    background-color: cyan;
+    background-color: white;
 		color: black;
 }
 
 .info{
-  color: cyan;
+  color: white;
   width: 25vw;
   height: 40vh;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 16px;
+  line-height: 25px;
 }
 
 .graph{
@@ -26,6 +32,9 @@ ul.cand li:hover {
 	margin-left: 25vw;
   max-width: 50vw;
   height: 86vh;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 16px;
+  line-height: 25px;
 }
 
 .right{
@@ -35,28 +44,52 @@ ul.cand li:hover {
   width: 25vw;
 }
 
-table{
-		width: 20vw;
-		color: cyan;
-    border: 1px solid cyan;
-		align: center;
+table.cand_table{
+  width: 70%;
+  overflow: hidden;
+  background: #FFF;
+  color: #0E6655;
+  border-radius: 10px;
+  border: 1px solid #0E6655;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 14px;
+  line-height: 24px;
 }
 
-th{
-	color: cyan;
+tr{
+    border: 1px solid #D9E4E6;
+}
+
+th {
+  display: none;
+  border: 1px solid #FFF;
+  background-color: #0E6655;
+  color: #FFF;
+  padding: .5em;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 14px;
+  line-height: 20px;
+  display: table-cell;
+  text-align: center;
+}
+
+td {
+  background: #0e0e0e;
+	border-right: 1px solid #000;
+	border-left: 1px solid #191919;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #191919;
 	padding: .5em;
+	position: relative;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 14px;
+  line-height: 30px;
+  word-wrap: break-word;
+  box-shadow: inset 1px 0 0 #000;
 }
 
-td{
-		padding: .5em;
-		background-color: #D5D8DC;
-		color: black;
-		-moz-box-shadow:    inset  0 10px #000000;
-			-webkit-box-shadow: inset 0 0 10px #000000;
-			box-shadow:         inset 0 0 10px #000000;
-			-webkit-border-radius: 4px;
-				 -moz-border-radius: 4px;
-							border-radius: 4px;
+p{
+  color: #167F92;
 }
 
 .alignleft{

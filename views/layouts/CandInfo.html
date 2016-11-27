@@ -6,9 +6,9 @@
 <div class = "right">
   <div>
     <ul class = "cand">
-      <li>Candidate_1</li>
-      <li>Candidate_2</li>
-      <li>Candidate_3</li>
+      <li>Candidate1</li>
+      <li>Candidate2</li>
+      <li>Candidate3</li>
     </ul>
   </div>
 
@@ -17,7 +17,7 @@
       First Name:  </p>
       <p class="alignright"><br><br>Last Name:  </p>
       <p>
-      <center><table>
+      <center><table class="cand_table">
         <tr>
           <th>Position</th>
           <th>Year</th>
@@ -26,7 +26,8 @@
           <td>#</td>
           <td>#</td>
         </tr>
-      </table></center></p>
+      </table></center>
+    </p>
   </div>
 </div>
 
@@ -37,6 +38,7 @@
 
 {{define "includes"}}
 <link rel="stylesheet" type="text/css" href="/css/cand_info.css" />
+<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="jquery-1.8.3.js"></script>
 <script src=""></script>
 {{end}}

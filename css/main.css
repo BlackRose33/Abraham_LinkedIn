@@ -5,7 +5,11 @@
 
 body {
   background-color: black;
-	color: orange;
+  background-image: url(../img/background.jpg);
+  background-size: 40% 100%;
+  background-position: left;
+  background-repeat: no-repeat;
+	color: white;
 }
 
 .header {
@@ -68,26 +72,23 @@ nav ul{
     line-height: 2;
     padding-left: .5em;
 		padding-right: .5em;
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 17px;
+    line-height: 30px;
 }
 
-nav ul a:link {             /*TODO:this doesnt work properly?*/
+nav ul a:link{
     text-decoration: none;
     color: white;
 }
 
-nav ul a:visited {
-    text-decoration: none;
-    color: orange;
-}
-
 nav ul a:hover {
 		display: block;
-    background-color: #566573;
-}
-
-.active {
-    background-color: orange;
+    background-color: #99A3A4;
     color: black;
+    transition: background-color .3s;
+    font-weight: bolder;
 }
 
 article {
@@ -99,4 +100,7 @@ article {
     overflow: auto;
 }
 
-/*remove*/
+img {
+  -webkit-filter: invert(.8);
+  filter: invert(.8);
+}
