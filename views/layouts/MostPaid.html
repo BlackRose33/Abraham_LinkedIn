@@ -5,18 +5,18 @@
 {{define "body"}}
 <div class="horz_nav">
   <ul>
-    <li>2001</li>
-    <li>2003</li>
-    <li>2005</li>
-    <li>2009</li>
-    <li>2013</li>
+    <li value="2001" onclick="ChangeCaption(this.value)">2001</li>
+    <li value="2003" onclick="ChangeCaption(this.value)">2003</li>
+    <li value="2005" onclick="ChangeCaption(this.value)">2005</li>
+    <li value="2009" onclick="ChangeCaption(this.value)">2009</li>
+    <li value="2013" onclick="ChangeCaption(this.value)">2013</li>
   </ul>
 </div>
 <div class="max_con">
   <p>
   The following table represents the candidates who were paid the largest amount per year.
   <center><table class="con_table">
-    <caption>2001</caption>
+    <caption id="caption">2001</caption>
     <tr>
       <th colspan="2">1</th>
       <th colspan="2">2</th>
@@ -71,5 +71,5 @@
 <link rel="stylesheet" type="text/css" href="/css/most_paid.css" />
 <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="jquery-1.8.3.js"></script>
-<script src=""></script>
+<script src="js/most_paid.js"></script>
 {{end}}

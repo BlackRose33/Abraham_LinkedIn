@@ -1,0 +1,42 @@
+ul.questions {
+  color: #ede68a;
+  height: 80vh;
+  width: 24vw;
+  margin: 0;
+  list-style-type: none;
+  line-height: 2;
+  padding-left: .5em;
+  text-align: left;
+  overflow: auto;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 16px;
+}
+
+ul.questions li{
+  padding: 10px 0px;
+}
+
+ul.questions li:hover {
+    color: #61b350;
+}
+
+.questions{
+  float: right;
+  color: #ede68a;
+  width: 25vw;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.left {
+  float: left;
+  vertical-align: middle;
+  color: #ede68a;
+  width: 45vw;
+  height: 80vh;
+}
+
+h1{
+  text-align: center;
+}
