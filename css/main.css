@@ -69,7 +69,6 @@ nav {
 
 nav ul{
     list-style-type: none;
-    line-height: 2;
     padding-left: .5em;
 		padding-right: .5em;
     font-family: 'Raleway', Helvetica, Arial, sans-serif;
@@ -78,8 +77,10 @@ nav ul{
     line-height: 30px;
 }
 
-nav ul a:link{
+nav ul a:link {
     text-decoration: none;
+    padding: 0.4em;
+    display: block;
     color: white;
 }
 

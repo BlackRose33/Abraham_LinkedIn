@@ -10,6 +10,12 @@
     <img style="opacity: {{.Data.Queens}}" src="/img/heat_queens.png" />
     <img style="opacity: {{.Data.StatenIsland}}" src="/img/heat_staten_island.png" />
   </div>
+  <div style="color: white; width: 300px; margin: auto;">
+    Unassigned Amount: {{.Data.UnassignedCount}}
+  </div>
+  <div style="color: white; width: 300px; margin: auto;">
+    Multi-Borough Amount: {{.Data.MultiBoroughCount}}
+  </div>
 {{end}}
 
 {{define "includes"}}
