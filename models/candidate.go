@@ -53,12 +53,12 @@ func GetCandidates(db *sql.DB) ([]Candidate, error) {
 
 // CandidateAmount holds information about expenditures from a candidate
 type CandidateAmount struct {
-	ID        string
-	FirstName string
-	LastName  string
-	Year      int
-	Amount    float64
-	EntityName   string
+	ID         string
+	FirstName  string
+	LastName   string
+	Year       int
+	Amount     float64
+	EntityName string
 }
 
 // GetBiggestSpenderOfAnyYear gets the... biggest spender of any year?
@@ -88,22 +88,47 @@ func GetBiggestSpenderOfAnyYear(db *sql.DB) (*CandidateAmount, error) {
 // GetMostPaidAnyYear returns the candidate who was paid the most in any year
 func GetMostPaidAnyYear(db *sql.DB) (*CandidateAmount, error) {
 	rows, err := db.Query("select con_name, con_amount, election_year " +
-" from contributes " +
-" group by con_amount " +
-" order by con_amount desc " +
-" limit 1")
+		" from contributes " +
+		" group by con_amount " +
+		" order by con_amount desc " +
+		" limit 1")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	if rows.Next() {
+		var contributes CandidateAmount
+		err = rows.Scan(&contributes.EntityName, &contributes.Amount, &contributes.Year)
+		if err == nil {
+			return &contributes, nil
+		}
+	}
+	return nil, nil
+}
 
+// GetCandidateContributionsForEachYear attempts to find the amount of
+// total contributions a candidate received in any year
+func GetCandidateContributionsForEachYear(db *sql.DB, candID string) (
+	[]CandidateAmount, error) {
+
+	rows, err := db.Query("SELECT c1.con_name, c1.con_amount, c1.election_year, "+
+		"c1.cand_id, c2.cand_first, c2.cand_last FROM contributes c1 JOIN "+
+		"candidate c2 ON c1.cand_id = c2.cand_id WHERE c1.cand_id = ? "+
+		"ORDER BY con_amount DESC", candID)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
-	if rows.Next() {
-		var contributes CandidateAmount
-		err = rows.Scan(&contributes.EntityName, &contributes.Amount, &contributes.Year)
+	amounts := make([]CandidateAmount, 0, 5)
+	for rows.Next() {
+		var amount CandidateAmount
+		err = rows.Scan(&amount.EntityName, &amount.Amount, &amount.Year,
+			&amount.ID, &amount.FirstName, &amount.LastName)
 		if err == nil {
-			return &contributes, nil 
+			amounts = append(amounts, amount)
 		}
 	}
-	return nil, nil
+
+	return amounts, nil
 }
