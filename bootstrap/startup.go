@@ -9,7 +9,6 @@ import (
 
 	"abraham_linkedin/constants"
 	"abraham_linkedin/controllers"
-	"abraham_linkedin/models"
 )
 
 // GlobalStart begins initialization for the application,
@@ -33,16 +32,6 @@ func GlobalStart() bool {
 
 	fmt.Println("[STARTUP] Creating Routes")
 	CreateRoutes()
-
-	counts, err := models.GetExplanationCounts(db)
-	if err == nil {
-		for _, count := range counts {
-			if count.Count < 1000 {
-				continue
-			}
-			fmt.Println("Explanation \""+count.Explanation+"\":", count.Count)
-		}
-	}
 
 	fmt.Println("[STARTUP] Starting server on port " +
 		strconv.Itoa(constants.PortNum))
