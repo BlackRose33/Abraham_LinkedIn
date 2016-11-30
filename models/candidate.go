@@ -51,8 +51,8 @@ func GetCandidates(db *sql.DB) ([]Candidate, error) {
 	return candidates, nil
 }
 
-// CandidateSpender holds information about expenditures from a candidate
-type CandidateSpender struct {
+// CandidateAmount holds information about expenditures from a candidate
+type CandidateAmount struct {
 	ID        string
 	FirstName string
 	LastName  string
@@ -62,7 +62,7 @@ type CandidateSpender struct {
 }
 
 // GetBiggestSpenderOfAnyYear gets the... biggest spender of any year?
-func GetBiggestSpenderOfAnyYear(db *sql.DB) (*CandidateSpender, error) {
+func GetBiggestSpenderOfAnyYear(db *sql.DB) (*CandidateAmount, error) {
 	rows, err := db.Query("select e.exp_name, e.exp_amount, e.election_year, e.cand_id, c.cand_first, c.cand_last " +
 		"from expenditures e join candidate c on e.cand_id = c.cand_id " +
 		"group by exp_amount " +
@@ -75,7 +75,7 @@ func GetBiggestSpenderOfAnyYear(db *sql.DB) (*CandidateSpender, error) {
 	defer rows.Close()
 
 	if rows.Next() {
-		var candidate CandidateSpender
+		var candidate CandidateAmount
 		err = rows.Scan(&candidate.ExpName, &candidate.Amount, &candidate.Year,
 			&candidate.ID, &candidate.FirstName, &candidate.LastName)
 		if err == nil {
