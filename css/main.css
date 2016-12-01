@@ -94,6 +94,10 @@ nav ul a:hover {
     font-weight: bolder;
 }
 
+nav ul a:visited {
+		color: white;
+}
+
 article {
 		margin-left: 25vw;
 		margin-bottom: 3vh;

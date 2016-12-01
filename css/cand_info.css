@@ -16,6 +16,10 @@ ul.cand li:hover {
     color: #58cce1;
 }
 
+ul.cand li:visited {
+    color: #7549B1;
+}
+
 .info{
   color: #7549B1;
   width: 24vw;

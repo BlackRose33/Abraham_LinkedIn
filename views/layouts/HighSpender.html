@@ -17,7 +17,8 @@
   <p>
   The following table represents the candidates who spent the largest amount per year
   <center><table class="spender_table">
-    <caption id="caption">2001</caption>
+    {{$year := index .Data 0}}
+    <caption id="caption">{{$year.Year}}</caption>
     <tr>
       <th>Position</th>
       <th>Candidate Name</th>
@@ -38,5 +39,4 @@
 {{define "includes"}}
 <link rel="stylesheet" type="text/css" href="/css/high_spender.css" />
 <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
-<script src="js/high_spender.js"></script>
 {{end}}

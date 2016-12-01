@@ -16,6 +16,10 @@ ul.cand li:hover {
     cursor: pointer;
 }
 
+ul.cand li:visited {
+    color: #dd2838;
+}
+
 .cand{
   color: #dd2838;
   float: right;

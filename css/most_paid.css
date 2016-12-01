@@ -23,6 +23,10 @@
   color: pink;
 }
 
+.horz_nav ul a:visited{
+  color: #0E6655;
+}
+
 p{
   padding-left: 10vw;
   padding-right: 10vw;

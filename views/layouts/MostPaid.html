@@ -5,46 +5,30 @@
 {{define "body"}}
 <div class="horz_nav">
   <ul>
-    <li value="2001" onclick="ChangeCaption(this.value)"><a href="/mostpaid/##2001">2001</a></li>
-    <li value="2003" onclick="ChangeCaption(this.value)"><a href="/mostpaid/##2003">2003</a></li>
-    <li value="2005" onclick="ChangeCaption(this.value)"><a href="/mostpaid/##2005">2005</a></li>
-    <li value="2009" onclick="ChangeCaption(this.value)"><a href="/mostpaid/##2009">2009</a></li>
-    <li value="2013" onclick="ChangeCaption(this.value)"><a href="/mostpaid/##2013">2013</a></li>
+    <li value="2001" onclick="ChangeCaption(this.value)"><a href="/mostpaid/2001">2001</a></li>
+    <li value="2003" onclick="ChangeCaption(this.value)"><a href="/mostpaid/2003">2003</a></li>
+    <li value="2005" onclick="ChangeCaption(this.value)"><a href="/mostpaid/2005">2005</a></li>
+    <li value="2009" onclick="ChangeCaption(this.value)"><a href="/mostpaid/2009">2009</a></li>
+    <li value="2013" onclick="ChangeCaption(this.value)"><a href="/mostpaid/2013">2013</a></li>
   </ul>
 </div>
 <div class="max_con">
   <p>
   The following table represents the candidates who were paid the largest amount per year.
   <center><table class="con_table">
-    <caption id="caption">2001</caption>
+    {{$year := index .Data 0}}
+    <caption id="caption">{{$year.Year}}</caption>
     <tr>
       <th>Position</th>
       <th>Candidate Name</th>
     </tr>
-    <tr>
-      <td>1</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td></td>
-    </tr>
+    {{$offices := .OfficeMap}}
+    {{range $i, $amount := .Data}}
+      <tr>
+        <td>{{index $offices $amount.OfficeCd}}</td>
+        <td>{{$amount.FirstName}} {{$amount.LastName}}</td>
+      </tr>
+    {{end}}
   </table></center>
   </p>
 </div>
@@ -53,5 +37,4 @@
 {{define "includes"}}
 <link rel="stylesheet" type="text/css" href="/css/most_paid.css" />
 <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
-<script src="js/most_paid.js"></script>
 {{end}}
