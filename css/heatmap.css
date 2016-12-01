@@ -1,10 +1,9 @@
 ul.cand {
   color: #dd2838;
   height: 80vh;
-  width: 24vw;
+  width: 22vw;
   margin: 0;
   list-style-type: none;
-  line-height: 2;
   padding-left: .5em;
   text-align: left;
   overflow: auto;
@@ -13,7 +12,8 @@ ul.cand {
 }
 
 ul.cand li:hover {
-    color: #58cce1;
+    color: orange;
+    cursor: pointer;
 }
 
 .cand{

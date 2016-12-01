@@ -33,7 +33,7 @@ func GetCandidateByID(db *sql.DB, id string) (*Candidate, error) {
 // GetCandidates gets all candidates in the database
 func GetCandidates(db *sql.DB) ([]Candidate, error) {
 	rows, err := db.Query("SELECT cand_id, cand_first, cand_last FROM " +
-		"candidate")
+		"candidate ORDER BY cand_last, cand_first ASC")
 	if err != nil {
 		return nil, err
 	}

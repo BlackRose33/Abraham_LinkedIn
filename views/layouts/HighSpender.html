@@ -22,30 +22,13 @@
       <th>Position</th>
       <th>Candidate Name</th>
     </tr>
-    <tr>
-      <td>1</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td></td>
-    </tr>
+    {{$offices := .OfficeMap}}
+    {{range $i, $amount := .Data}}
+      <tr>
+        <td>{{index $offices $amount.OfficeCd}}</td>
+        <td>{{$amount.FirstName}} {{$amount.LastName}}</td>
+      </tr>
+    {{end}}
     </table></center>
   </p>
 </div>

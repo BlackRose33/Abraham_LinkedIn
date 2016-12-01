@@ -79,7 +79,7 @@ nav ul{
     line-height: 30px;
 }
 
-nav ul a:link {
+nav ul a {
     text-decoration: none;
     padding: 0.4em;
     display: block;
