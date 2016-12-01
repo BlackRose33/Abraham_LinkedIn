@@ -241,8 +241,8 @@ func GetHighestPaidByPositionForYear(db *sql.DB, year int) ([]CandidateAmount,
 	return amounts, nil
 }
 
-// getTotalAmountThisCandidateContributedEachYear get total amount this candidate (ex. 605) contributed each year
-func getTotalAmountThisCandidateContributedEachYear(db *sql.DB, candID string) ([]CandidateAmount, error) {
+// GetTotalAmountThisCandidateContributedEachYear get total amount this candidate (ex. 605) contributed each year
+func GetTotalAmountThisCandidateContributedEachYear(db *sql.DB, candID string) ([]CandidateAmount, error) {
 	rows, err := db.Query("select cand_id, sum(con_amount), election_year "+
 		"from contributes "+
 		"where cand_id = ? "+
