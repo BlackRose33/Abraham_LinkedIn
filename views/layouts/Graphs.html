@@ -7,12 +7,35 @@
     <ul id="candidateList" class="cand"></ul>
   </div>
   <div class="left">
-    <div class="heatmap">
-      <img class="map" style="opacity: {{.Data.Bronx}}" src="/img/heat_bronx.png" />
-      <img class="map" style="opacity: {{.Data.Brooklyn}}" src="/img/heat_brooklyn.png" />
-      <img class="map" style="opacity: {{.Data.Manhattan}}" src="/img/heat_manhattan.png" />
-      <img class="map" style="opacity: {{.Data.Queens}}" src="/img/heat_queens.png" />
-      <img class="map" style="opacity: {{.Data.StatenIsland}}" src="/img/heat_staten_island.png" />
+    <div style="position: absolute; left: 50%; transform: translateX(-50%);">
+
+      <div style="text-align: center">
+        <h4>
+          {{.Data.Candidate.FirstName}} {{.Data.Candidate.LastName}}
+          {{if .Data.BoroughPercentages.IsAmountMode}}
+            (By Dollar Amount)
+          {{else}}
+            (By Number of Contributions)
+          {{end}}
+        </h4>
+      </div>
+
+      <div class="heatmap">
+        <img class="map" style="opacity: {{.Data.BoroughPercentages.Bronx}}" src="/img/heat_bronx.png" />
+        <img class="map" style="opacity: {{.Data.BoroughPercentages.Brooklyn}}" src="/img/heat_brooklyn.png" />
+        <img class="map" style="opacity: {{.Data.BoroughPercentages.Manhattan}}" src="/img/heat_manhattan.png" />
+        <img class="map" style="opacity: {{.Data.BoroughPercentages.Queens}}" src="/img/heat_queens.png" />
+        <img class="map" style="opacity: {{.Data.BoroughPercentages.StatenIsland}}" src="/img/heat_staten_island.png" />
+      </div>
+      <br />
+
+      <div style="text-align: center">
+        {{if .Data.BoroughPercentages.IsAmountMode}}
+          <a style="color: white;" href="/graphs/{{.Data.CandID}}">Switch to viewing based on number of contributions</a>
+        {{else}}
+          <a style="color: white;" href="/graphs/amt/{{.Data.CandID}}">Switch to viewing amounts</a>
+        {{end}}
+      </div>
     </div>
   </div>
 {{end}}

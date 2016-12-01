@@ -1,6 +1,6 @@
 ul.cand {
   color: #dd2838;
-  height: 80vh;
+  height: 95vh;
   width: 22vw;
   margin: 0;
   list-style-type: none;
@@ -34,19 +34,13 @@ ul.cand li:visited {
   vertical-align: middle;
   color: #dd2838;
   width: 45vw;
-  height: 80vh;
+  height: 100vh;
 }
 
 .heatmap {
-  float:center;
   height: 60vh;
   width: 60vh;
-  margin: 2em auto 0;
   position: relative;
-    top: 60%;
-    left: 50%;
-    margin-left: -200px;
-    margin-top: -240px;;
 }
 
 .heatmap > img.map {
