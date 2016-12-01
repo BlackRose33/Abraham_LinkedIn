@@ -64,7 +64,8 @@ type CandidateAmount struct {
 
 // GetBiggestSpenderOfAnyYear gets the... biggest spender of any year?
 func GetBiggestSpenderOfAnyYear(db *sql.DB) (*CandidateAmount, error) {
-	rows, err := db.Query("select e.exp_name, e.exp_amount, e.election_year, e.cand_id, c.cand_first, c.cand_last " +
+	rows, err := db.Query("select e.exp_name, e.exp_amount, e.election_year, " +
+		"e.cand_id, c.cand_first, c.cand_last " +
 		"from expenditures e join candidate c on e.cand_id = c.cand_id " +
 		"group by exp_amount " +
 		"order by exp_amount desc " +
@@ -169,7 +170,8 @@ func GetTotalAmountThisCandidateReceived(db *sql.DB, candID string) (*CandidateA
 
 	if rows.Next() {
 		var contribution CandidateAmount
-		err = rows.Scan(&contribution.EntityName, &contribution.Amount)
+		err = rows.Scan(&contribution.ID, &contribution.EntityName,
+			&contribution.Amount)
 		if err == nil {
 			return &contribution, nil
 		}
