@@ -5,6 +5,7 @@ type Expenditure struct {
   Sched string
   C_code string
   Count int
+  Year int
 }
 
 // CountSchedules counts the number of schedules
@@ -50,6 +51,31 @@ func CountCCodes(db *sql.DB) (*Expenditure, error) {
 	for rows.Next() {
 		var amount Expenditure
 		err = rows.Scan(&amount.C_code, &amount.Count)
+		if err == nil {
+			amounts = append(amounts, amount)
+		}
+	}
+
+	return amounts, nil
+}
+
+// NumExpendituresEachYear get number of expenditures made each year
+func NumExpendituresEachYear(db *sql.DB) (*Expenditure, error) {
+  rows, err := db.Query("select election_year, count(election_year) " +
+    " from expenditures " +
+    " group by election_year " +
+    " order by count(election_year) asc;")
+
+  if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+  amounts := make([]Expenditure, 0, 5)
+	for rows.Next() {
+		var amount Expenditure
+		err = rows.Scan(&amount.Year, &amount.Count)
 		if err == nil {
 			amounts = append(amounts, amount)
 		}
