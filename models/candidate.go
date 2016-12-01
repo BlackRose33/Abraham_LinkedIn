@@ -2,14 +2,16 @@ package models
 
 import "database/sql"
 
+// CandInfo werhiqweriun
 type CandInfo struct {
 	Candidate Candidate
-	Position []Positions
+	Position  []Positions
 }
 
+// Positions aweiurnhalewj r
 type Positions struct {
-	OfficeCd   int
-	Year       int
+	OfficeCd int
+	Year     int
 }
 
 // Candidate encompasses fields that describe political candidates
@@ -19,9 +21,30 @@ type Candidate struct {
 	LastName  string
 }
 
-// GetCandidateByID attempts to find a candidate in the database based on
+// GetCandidateByID attempts to find a candidate in the database based on an
+// ID
+func GetCandidateByID(db *sql.DB, id string) (*Candidate, error) {
+	rows, err := db.Query("SELECT cand_id, cand_first, cand_last FROM "+
+		"candidate WHERE cand_id = ?", id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	if rows.Next() {
+		var candidate Candidate
+		err = rows.Scan(&candidate.ID, &candidate.FirstName, &candidate.LastName)
+		if err == nil {
+			return &candidate, nil
+		}
+	}
+
+	return nil, nil
+}
+
+// GetCandidateByIDWithInfo attempts to find a candidate in the database based on
 // an ID
-func GetCandidateByID(db *sql.DB, id string) (*CandInfo, error) {
+func GetCandidateByIDWithInfo(db *sql.DB, id string) (*CandInfo, error) {
 	if id == "" {
 		var candidate CandInfo
 		candidate.Candidate.ID = " "
@@ -29,7 +52,8 @@ func GetCandidateByID(db *sql.DB, id string) (*CandInfo, error) {
 		candidate.Candidate.LastName = " "
 		candidate.Position = []Positions{}
 		return &candidate, nil
-	} else {
+	}
+
 	rows, err := db.Query("SELECT cand_id, cand_first, cand_last FROM "+
 		"candidate WHERE cand_id = ?", id)
 	if err != nil {
@@ -42,26 +66,25 @@ func GetCandidateByID(db *sql.DB, id string) (*CandInfo, error) {
 		err = rows.Scan(&candidate.Candidate.ID, &candidate.Candidate.FirstName, &candidate.Candidate.LastName)
 		if err != nil {
 			return nil, err
-
-	rows, err := db.Query("SELECT office_code, year FROM candidacy WHERE cand_id = ?", id)
-	if err!= nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	positions := make([]Positions, 0, 4)
-	for rows.Next() {
-		var pos Positions
-		err = rows.Scan(&pos.OfficeCd, &pos.Year)
-		if err == nil {
-			positions = append(positions, pos)
 		}
-	}
-	candidate.Position = positions
+
+		rows2, err := db.Query("SELECT office_code, election_year FROM candidacy WHERE cand_id = ?", id)
+		if err != nil {
+			return nil, err
+		}
+		defer rows2.Close()
+
+		positions := make([]Positions, 0, 4)
+		for rows2.Next() {
+			var pos Positions
+			err = rows2.Scan(&pos.OfficeCd, &pos.Year)
+			if err == nil {
+				positions = append(positions, pos)
+			}
+		}
+		candidate.Position = positions
 
 		return &candidate, nil
-	}
-	}
 	}
 	return nil, nil
 }

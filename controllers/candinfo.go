@@ -14,15 +14,15 @@ func CandInfo(w http.ResponseWriter, r *http.Request) {
 		args = append(args, "")
 	}
 
-	CandidateInfo, err := models.GetCandidateByID(Base.Db,
-			args[0])
+	CandidateInfo, err := models.GetCandidateByIDWithInfo(Base.Db,
+		args[0])
 
-		if err != nil {
-			http.Error(w, "Internal Error", http.StatusInternalServerError)
-			return
-		}
+	if err != nil {
+		http.Error(w, "Internal Error", http.StatusInternalServerError)
+		return
+	}
 
-		viewData.Data = CandidateInfo
+	viewData.Data = CandidateInfo
 
 	RenderView(w, "layouts#CandInfo", viewData)
 }

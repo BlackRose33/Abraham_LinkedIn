@@ -26,7 +26,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		id = args[0]
 	}
 
-	candidate, err := models.GetCandidateByID(Base.Db, id)
+	candidate, err := models.GetCandidateByIDWithInfo(Base.Db, id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
