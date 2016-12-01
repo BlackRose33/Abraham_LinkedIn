@@ -10,6 +10,7 @@ body {
   background-position: left;
   background-repeat: no-repeat;
 	color: white;
+  font-family: "Open Sans";
 }
 
 .header {
@@ -53,6 +54,7 @@ footer {
 
 .container{
 	display: inline-block;
+  width: 100%;
 }
 
 nav {
@@ -95,7 +97,6 @@ nav ul a:hover {
 article {
 		margin-left: 25vw;
 		margin-bottom: 3vh;
-		width: 73.5vw;
     height: 86vh;
     padding: 1em;
     overflow: auto;
