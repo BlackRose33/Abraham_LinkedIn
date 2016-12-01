@@ -19,6 +19,8 @@ type Candidate struct {
 	ID        string
 	FirstName string
 	LastName  string
+	CandClass string
+	Count			int
 }
 
 // GetCandidateByID attempts to find a candidate in the database based on an
@@ -344,6 +346,29 @@ func GetContributeDates(db *sql.DB, candID string) ([]CandidateAmount, error) {
 	for rows.Next() {
 		var amount CandidateAmount
 		err = rows.Scan(&amount.ID, &amount.EntityName)
+		if err == nil {
+			amounts = append(amounts, amount)
+		}
+	}
+
+	return amounts, nil
+}
+
+func GetMostCandClass(db *sql.DB) (*Candidate, error) {
+	rows, err := db.Query("select cand_class, count(cand_class) " +
+		"from candidate " +
+		"group by cand_class " +
+		"order by count(cand_class) desc")
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	amounts := make([]Candidate, 0, 3)
+	for rows.Next() {
+		var amount Candidate
+		err = rows.Scan(&amount.CandClass, &amount.Count)
 		if err == nil {
 			amounts = append(amounts, amount)
 		}
