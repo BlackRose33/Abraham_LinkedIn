@@ -7,7 +7,7 @@ import (
 )
 
 type homeData struct {
-	Candidate *models.Candidate
+	CandInfo *models.CandInfo
 }
 
 // Home is the index page for the admin panel
@@ -34,7 +34,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	viewData := BaseViewData(w, r)
 	viewData.Data = &homeData{
-		Candidate: candidate,
+		CandInfo: candidate,
 	}
 	RenderView(w, "home#index", viewData)
 }
