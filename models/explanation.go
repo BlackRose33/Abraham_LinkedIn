@@ -44,7 +44,7 @@ func GetPurposeCounts(db *sql.DB) ([]ExplanationCount, error) {
 
 	counts := make([]ExplanationCount, 0, 20)
 	for rows.Next() {
-		var count Explanation
+		var count ExplanationCount
 		err = rows.Scan(&count.Explanation, &count.Count)
 		if err == nil {
 			counts = append(counts, count)
