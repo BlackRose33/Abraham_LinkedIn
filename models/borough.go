@@ -22,6 +22,7 @@ type BoroughPercentages struct {
 	StatenIsland      float64 `json:"staten_island"`
 	UnassignedCount   float64 `json:"unassigned_count"`
 	MultiBoroughCount float64 `json:"multi_borough_count"`
+	IsAmountMode      bool    `json:"is_amount_mode"`
 }
 
 // GetBoroughContribAmountPercentagesForCandidate generates heatmap
@@ -83,6 +84,7 @@ func GetBoroughContribAmountPercentagesForCandidate(db *sql.DB,
 		StatenIsland:      .2 + amounts[statenIslandCode]/max*.8,
 		UnassignedCount:   amounts[unassignedCode],
 		MultiBoroughCount: amounts[multiBoroughCode],
+		IsAmountMode:      true,
 	}, nil
 }
 
@@ -140,5 +142,6 @@ func GetBoroughContribPercentagesForCandidate(db *sql.DB, candidateID string) (
 		StatenIsland:      .2 + counts[statenIslandCode]/max*.8,
 		UnassignedCount:   counts[unassignedCode],
 		MultiBoroughCount: counts[multiBoroughCode],
+		IsAmountMode:      false,
 	}, nil
 }

@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"html/template"
+	"strconv"
 	"strings"
 )
 
@@ -20,11 +21,16 @@ func GetTemplates() map[string]*template.Template {
 	return templates
 }
 
+func formatPrice(price float64) string {
+	return "$" + strconv.FormatFloat(price, 'f', 2, 64)
+}
+
 func loadTemplate(fpath string) *template.Template {
 
 	funcs := template.FuncMap{
 		"title":   strings.Title,
 		"compare": strings.Compare,
+		"price":   formatPrice,
 	}
 
 	return template.Must(
