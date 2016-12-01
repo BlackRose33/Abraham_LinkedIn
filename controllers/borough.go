@@ -5,6 +5,12 @@ import (
 	"net/http"
 )
 
+type boroughHeatmapData struct {
+	BoroughPercentages models.BoroughPercentages
+	CandID             string
+	Candidate          *models.Candidate
+}
+
 // BoroughHeatmapContribAmtCandid handles the route '/graphs/amt/#cand_id'
 func BoroughHeatmapContribAmtCandid(w http.ResponseWriter,
 	r *http.Request) {
@@ -19,12 +25,28 @@ func BoroughHeatmapContribAmtCandid(w http.ResponseWriter,
 	boroughCounts, err := models.GetBoroughContribAmountPercentagesForCandidate(
 		Base.Db, args[0])
 
-	if err != nil {
+	if err != nil || boroughCounts == nil {
 		http.Error(w, "Internal Error", http.StatusInternalServerError)
 		return
 	}
 
-	viewData.Data = boroughCounts
+	var candidate = &models.Candidate{
+		ID:        args[0],
+		FirstName: "All",
+		LastName:  "Candidates",
+	}
+	if len(args[0]) > 0 {
+		candidateTmp, err := models.GetCandidateByID(Base.Db, args[0])
+		if candidateTmp != nil && err == nil {
+			candidate = candidateTmp
+		}
+	}
+
+	viewData.Data = &boroughHeatmapData{
+		BoroughPercentages: *boroughCounts,
+		CandID:             args[0],
+		Candidate:          candidate,
+	}
 
 	RenderView(w, "layouts#Graphs", viewData)
 }
@@ -42,12 +64,28 @@ func BoroughHeatmapContribCandid(w http.ResponseWriter, r *http.Request) {
 	boroughCounts, err := models.GetBoroughContribPercentagesForCandidate(Base.Db,
 		args[0])
 
-	if err != nil {
+	if err != nil || boroughCounts == nil {
 		http.Error(w, "Internal Error", http.StatusInternalServerError)
 		return
 	}
 
-	viewData.Data = boroughCounts
+	var candidate = &models.Candidate{
+		ID:        args[0],
+		FirstName: "All",
+		LastName:  "Candidates",
+	}
+	if len(args[0]) > 0 {
+		candidateTmp, err := models.GetCandidateByID(Base.Db, args[0])
+		if candidateTmp != nil && err == nil {
+			candidate = candidateTmp
+		}
+	}
+
+	viewData.Data = &boroughHeatmapData{
+		BoroughPercentages: *boroughCounts,
+		CandID:             args[0],
+		Candidate:          candidate,
+	}
 
 	RenderView(w, "layouts#Graphs", viewData)
 }
