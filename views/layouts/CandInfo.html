@@ -5,26 +5,12 @@
 {{define "body"}}
 <div class = "right">
   <div>
-    <ul class = "cand">
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-      <li>Candidate</li>
-    </ul>
+    <ul id="candidateList" class="cand"></ul>
   </div>
 
   <div class = "info">
-      <p class="alignleft"><br><br>Candidate ID:<br><br>
-      First Name:  </p>
+      <p class="alignleft"><br><br>Candidate ID: {{.Data.ID}}<br><br>
+      Name:  {{.Data.FirstName}} {{.Data.LastName}}</p>
       <p><br>
       <center><table class="cand_table">
         <tr>
@@ -32,8 +18,8 @@
           <th>Year</th>
         </tr>
         <tr>
-          <td>#</td>
-          <td>#</td>
+          <td></td>
+          <td></td>
         </tr>
       </table></center>
     </p>
@@ -48,6 +34,7 @@
 {{end}}
 
 {{define "includes"}}
+<script type="text/javascript" src="/js/heatmap.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/cand_info.css" />
 <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 <script src=""></script>

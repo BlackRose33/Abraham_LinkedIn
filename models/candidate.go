@@ -12,6 +12,13 @@ type Candidate struct {
 // GetCandidateByID attempts to find a candidate in the database based on
 // an ID
 func GetCandidateByID(db *sql.DB, id string) (*Candidate, error) {
+	if id == "" {
+		var candidate Candidate
+		candidate.ID = " "
+		candidate.FirstName = " "
+		candidate.LastName = " "
+		return &candidate, nil
+	} else {
 	rows, err := db.Query("SELECT cand_id, cand_first, cand_last FROM "+
 		"candidate WHERE cand_id = ?", id)
 	if err != nil {
@@ -26,6 +33,7 @@ func GetCandidateByID(db *sql.DB, id string) (*Candidate, error) {
 			return nil, err
 		}
 		return &candidate, nil
+	}
 	}
 	return nil, nil
 }

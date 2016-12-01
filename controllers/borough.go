@@ -26,7 +26,7 @@ func BoroughHeatmapContribAmtCandid(w http.ResponseWriter,
 
 	viewData.Data = boroughCounts
 
-	RenderView(w, "borough#contribheat", viewData)
+	RenderView(w, "layouts#Graphs", viewData)
 }
 
 // BoroughHeatmapContribCandid handles the route

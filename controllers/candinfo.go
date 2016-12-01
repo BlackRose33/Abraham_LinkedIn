@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"abraham_linkedin/models"
 	"net/http"
 )
 
@@ -12,6 +13,16 @@ func CandInfo(w http.ResponseWriter, r *http.Request) {
 	if len(args) != 1 {
 		args = append(args, "")
 	}
+
+	CandidateInfo, err := models.GetCandidateByID(Base.Db,
+			args[0])
+
+		if err != nil {
+			http.Error(w, "Internal Error", http.StatusInternalServerError)
+			return
+		}
+
+		viewData.Data = CandidateInfo
 
 	RenderView(w, "layouts#CandInfo", viewData)
 }
