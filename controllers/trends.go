@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-//trends/##candid
+// Trends handles trends/##candid
 func Trends(w http.ResponseWriter, r *http.Request) {
 	args := URIArgs(r)
 	viewData := BaseViewData(w, r)

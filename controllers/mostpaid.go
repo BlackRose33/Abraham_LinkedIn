@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-//mostpaid/##candid
+// MostPaid handles mostpaid/##candid
 func MostPaid(w http.ResponseWriter, r *http.Request) {
 	args := URIArgs(r)
 	viewData := BaseViewData(w, r)

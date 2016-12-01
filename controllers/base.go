@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"abraham_linkedin/constants"
 	"bytes"
 	"database/sql"
 	"encoding/json"
@@ -11,7 +12,8 @@ import (
 
 // ViewData encapsulates any information needed to render a view
 type ViewData struct {
-	Data interface{}
+	OfficeMap map[int]string
+	Data      interface{}
 }
 
 // Base contains all variables shared by controllers
@@ -30,7 +32,10 @@ func BaseInitialization(templates map[string]*template.Template, db *sql.DB) {
 
 // BaseViewData populates view data based on the request and response writer
 func BaseViewData(w http.ResponseWriter, r *http.Request) ViewData {
-	return ViewData{}
+	viewData := ViewData{
+		OfficeMap: constants.OfficeNames,
+	}
+	return viewData
 }
 
 // RenderPlainView attempts to render a view with only the base view data

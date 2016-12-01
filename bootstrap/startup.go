@@ -29,6 +29,7 @@ func GlobalStart() bool {
 
 	fmt.Println("[STARTUP] Initializing Services")
 	controllers.BaseInitialization(templates, db)
+	constants.BaseInitialization()
 
 	fmt.Println("[STARTUP] Creating Routes")
 	CreateRoutes()
