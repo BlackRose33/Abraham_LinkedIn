@@ -62,7 +62,7 @@ nav {
     float: left;
     color: white;
     max-width: 25vw;
-    height: 86vh;
+    height: 100vh;
     margin: 0;
     position: absolute;
     overflow: auto;
@@ -101,7 +101,7 @@ nav ul a:visited {
 article {
 		margin-left: 25vw;
 		margin-bottom: 3vh;
-    height: 86vh;
+    height: 100vh;
     padding: 1em;
     overflow: auto;
 }
