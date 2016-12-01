@@ -267,3 +267,28 @@ func GetTotalAmountThisCandidateContributedEachYear(db *sql.DB, candID string) (
 
 	return amounts, nil
 }
+
+// GetContributeDates gets the dates of this candidate's contributions
+func GetContributeDates(db *sql.DB, candID string) ([]CandidateAmount, error) {
+	rows, err := db.Query("select cand_id, str_to_date(con_date, '%m/%d/%Y %k:%i:%s') as dt " +
+		" from contributes " +
+		" where cand_id = ? " +
+		" group by dt " +
+		" order by dt asc")
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	amounts := make([]CandidateAmount, 0, 110)
+	for rows.Next() {
+		var amount CandidateAmount
+		err = rows.Scan(&amount.ID, &amount.EntityName)
+		if err == nil {
+			amounts = append(amounts, amount)
+		}
+	}
+
+	return amounts, nil
+}
