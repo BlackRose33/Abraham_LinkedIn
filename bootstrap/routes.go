@@ -16,8 +16,8 @@ func CreateRoutes() {
 	http.Handle(route("/", controllers.Home))
 
 	http.Handle(route("/candinfo/", controllers.CandInfo))
-	http.Handle(route("/highspender", controllers.HighSpender))
-	http.Handle(route("/mostpaid", controllers.MostPaid))
+	http.Handle(route("/highspender/", controllers.HighSpender))
+	http.Handle(route("/mostpaid/", controllers.MostPaid))
 	http.Handle(route("/trends", controllers.Trends))
 	http.Handle(route("/graphs/", controllers.BoroughHeatmapContribCandid))
 
