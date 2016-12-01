@@ -1,5 +1,5 @@
-ul.cand {
-  color: #dd2838;
+ul.questions {
+  color: #ede68a;
   height: 80vh;
   width: 24vw;
   margin: 0;
@@ -12,13 +12,17 @@ ul.cand {
   font-size: 16px;
 }
 
-ul.cand li:hover {
-    color: #58cce1;
+ul.questions li{
+  padding: 10px 0px;
 }
 
-.cand{
-  color: #dd2838;
+ul.questions li:hover {
+    color: #61b350;
+}
+
+.questions{
   float: right;
+  color: #ede68a;
   width: 25vw;
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 16px;
@@ -28,25 +32,11 @@ ul.cand li:hover {
 .left {
   float: left;
   vertical-align: middle;
-  color: #dd2838;
+  color: #ede68a;
   width: 45vw;
   height: 80vh;
 }
 
-.heatmap {
-  float:center;
-  height: 60vh;
-  width: 60vh;
-  margin: 2em auto 0;
-  position: relative;
-    top: 60%;
-    left: 50%;
-    margin-left: -200px;
-    margin-top: -240px;;
-}
-
-.heatmap > img.map {
-  height: 100%;
-  position: absolute;
-  width: 100%;
+h1{
+  text-align: center;
 }

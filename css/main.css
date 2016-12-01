@@ -101,7 +101,7 @@ article {
     overflow: auto;
 }
 
-img {
+img.divider {
   -webkit-filter: invert(.8);
   filter: invert(.8);
 }

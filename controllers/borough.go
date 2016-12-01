@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// BoroughHeatmapContribAmtCandid handles the route '/borough/heat/contrib/amt/#cand_id'
+// BoroughHeatmapContribAmtCandid handles the route '/graphs/amt/#cand_id'
 func BoroughHeatmapContribAmtCandid(w http.ResponseWriter,
 	r *http.Request) {
 
@@ -30,7 +30,7 @@ func BoroughHeatmapContribAmtCandid(w http.ResponseWriter,
 }
 
 // BoroughHeatmapContribCandid handles the route
-// '/borough/heat/contrib/##candid'
+// '/graphs/##candid'
 func BoroughHeatmapContribCandid(w http.ResponseWriter, r *http.Request) {
 	args := URIArgs(r)
 	viewData := BaseViewData(w, r)

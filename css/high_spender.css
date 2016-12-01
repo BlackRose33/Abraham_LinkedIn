@@ -14,7 +14,12 @@
   width: 14vw;
 }
 
-.horz_nav ul li:hover{
+.horz_nav ul a{
+  text-decoration: none;
+  color: #167F92;
+}
+
+.horz_nav ul a:hover{
   color: pink;
 }
 
@@ -49,6 +54,7 @@ caption{
   font-size: 20px;
   line-height: 30px;
   vertical-align: top;
+  color: #135568;
 }
 
 tr{
