@@ -21,12 +21,14 @@
     <tr>
       <th>Position</th>
       <th>Candidate Name</th>
+      <th>Amount Raised</th>
     </tr>
     {{$offices := .OfficeMap}}
     {{range $i, $amount := .Data}}
       <tr>
         <td>{{index $offices $amount.OfficeCd}}</td>
         <td>{{$amount.FirstName}} {{$amount.LastName}}</td>
+        <td>{{price $amount.Amount}}</td>
       </tr>
     {{end}}
   </table></center>
