@@ -34,3 +34,27 @@ func CountOccupation(db *sql.DB) (*Contribution, error) {
 
 	return amounts, nil
 }
+
+// HighestMatchAmount find highest match amount in table
+func HighestMatchAmount(db *sql.DB) (*Contribution, error) {
+	rows, err := db.Query("select match_amt " +
+		"from contributes " +
+		"group by match_amt " +
+		"order by match_amt desc " +
+		"limit 1")
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	if rows.Next() {
+		var contributes Contribution
+		err = rows.Scan(&contributes.Amount)
+		if err == nil {
+			return &contributes, nil
+		}
+	}
+	return nil, nil
+}
