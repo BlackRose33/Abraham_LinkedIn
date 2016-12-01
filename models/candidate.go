@@ -132,3 +132,72 @@ func GetCandidateContributionsForEachYear(db *sql.DB, candID string) (
 
 	return amounts, nil
 }
+
+// getTotalAmountThisCandidateContributed get total amount that this candidate (ex. 605) contributed (ex. $999999)
+func getTotalAmountThisCandidateContributed(db *sql.DB, candID string) (
+	[]CandidateAmount, error) {
+	rows, err := db.Query("select cand_id, sum(con_amount) " +
+		"from contributes " +
+		"where cand_id = '605'")
+
+		if err != nil {
+			return nil, err
+		}
+		defer rows.Close()
+
+		if rows.Next() {
+			var contributes CandidateAmount
+			err = rows.Scan(&contributes.EntityName, &contributes.Amount)
+			if err == nil {
+				return &contributes, nil
+			}
+		}
+		return nil, nil
+}
+
+// getTotalAmountThisCandidateReceived get total amount this candidate (ex. 605) received
+func getTotalAmountThisCandidateReceived(db *sql.DB, candID string) {
+	rows, err := db.Query("select cand_id, exp_amount, sum(exp_amount) " +
+		"from expenditures " +
+		"where cand_id = '605'")
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	if rows.Next() {
+		var contributes CandidateAmount
+		err = rows.Scan(&expenditures.EntityName, &expenditures.Amount)
+		if err == nil {
+			return &expenditures, nil
+		}
+	}
+	return nil, nil
+
+}
+
+// getTotalAmountThisCandidateContributedEachYear get total amount this candidate (ex. 605) contributed each year
+func getTotalAmountThisCandidateContributedEachYear(db *sql.DB, candID string) {
+	rows, err := db.Query("select cand_id, sum(con_amount), election_year " +
+		"from contributes " +
+		"where cand_id = '605' " +
+		"group by election_year " +
+		"order by election_year desc")
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	amounts := make([]CandidateAmount, 0, 5)
+	for rows.Next() {
+		var amount CandidateAmount
+		err = rows.Scan(&amount.ID, &amount.Amount, &amount.Year)
+		if err == nil {
+			amounts = append(amounts, amount)
+		}
+	}
+
+	return amounts, nil
+}
