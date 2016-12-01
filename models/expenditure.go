@@ -1,6 +1,6 @@
 package models
 
-// Expenditure struct with sched, c_code
+// Expenditure struct with sched, c_code, count
 type Expenditure struct {
   Sched string
   C_code string

@@ -7,6 +7,7 @@ type Contribution struct {
 	FirstName string
 	LastName  string
 	Occupation string
+	Count int
 }
 
 // CountOccupation counts the number of each occupation
