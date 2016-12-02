@@ -1,5 +1,7 @@
 package models
 
+import "database/sql"
+
 // Contribution struct with year, amount, first name, last name, occupation
 type Contribution struct {
 	Year      int
@@ -7,11 +9,12 @@ type Contribution struct {
 	FirstName string
 	LastName  string
 	Occupation string
-	Count int
+	Count 		int
+	Sched			string
 }
 
 // CountOccupation counts the number of each occupation
-func CountOccupation(db *sql.DB) (*Contribution, error) {
+func CountOccupation(db *sql.DB) ([]Contribution, error) {
 	rows, err := db.Query("select occupation, count(occupation) " +
 		"from contributes " +
 		"group by occupation " +
@@ -59,8 +62,8 @@ func HighestMatchAmount(db *sql.DB) (*Contribution, error) {
 	return nil, nil
 }
 
-// CountSchedules counts the number of schedules of each (ex. ABC, M, D)
-func CountSchedules(db *sql.DB) (*Contribution, error) {
+// CountSchedulesCon counts the number of schedules of each (ex. ABC, M, D)
+func CountSchedulesCon(db *sql.DB) ([]Contribution, error) {
   rows, err := db.Query("select sched, count(sched) " +
     "from contributes " +
     "group by sched " +
@@ -86,7 +89,7 @@ func CountSchedules(db *sql.DB) (*Contribution, error) {
 }
 
 // NumContributionsEachYear get number of contributions each year
-func NumContributionsEachYear(db *sql.DB) (*Contribution, error) {
+func NumContributionsEachYear(db *sql.DB) ([]Contribution, error) {
   rows, err := db.Query("select election_year, count(election_year) " +
     " from contributes " +
     " group by election_year " +

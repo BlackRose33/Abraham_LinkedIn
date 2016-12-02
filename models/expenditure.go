@@ -1,5 +1,7 @@
 package models
 
+import "database/sql"
+
 // Expenditure struct with sched, c_code, count
 type Expenditure struct {
   Sched string
@@ -8,8 +10,8 @@ type Expenditure struct {
   Year int
 }
 
-// CountSchedules counts the number of schedules
-func CountSchedules(db *sql.DB) (*Expenditure, error) {
+// CountSchedulesExp counts the number of schedules
+func CountSchedulesExp(db *sql.DB) ([]Expenditure, error) {
   rows, err := db.Query("select sched, count(sched) " +
     "from expenditures " +
     "group by sched " +
@@ -35,7 +37,7 @@ func CountSchedules(db *sql.DB) (*Expenditure, error) {
 }
 
 // CountCCodes counts the number of c_codes
-func CountCCodes(db *sql.DB) (*Expenditure, error) {
+func CountCCodes(db *sql.DB) ([]Expenditure, error) {
   rows, err := db.Query("select c_code, count(c_code) " +
     "from expenditures " +
     "group by c_code " +
@@ -60,7 +62,7 @@ func CountCCodes(db *sql.DB) (*Expenditure, error) {
 }
 
 // NumExpendituresEachYear get number of expenditures made each year
-func NumExpendituresEachYear(db *sql.DB) (*Expenditure, error) {
+func NumExpendituresEachYear(db *sql.DB) ([]Expenditure, error) {
   rows, err := db.Query("select election_year, count(election_year) " +
     " from expenditures " +
     " group by election_year " +

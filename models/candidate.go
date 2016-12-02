@@ -354,7 +354,7 @@ func GetContributeDates(db *sql.DB, candID string) ([]CandidateAmount, error) {
 	return amounts, nil
 }
 
-func GetMostCandClass(db *sql.DB) (*Candidate, error) {
+func GetMostCandClass(db *sql.DB) ([]Candidate, error) {
 	rows, err := db.Query("select cand_class, count(cand_class) " +
 		"from candidate " +
 		"group by cand_class " +
