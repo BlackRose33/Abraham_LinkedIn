@@ -1,7 +1,7 @@
 ul.cand {
   color: #7549B1;
   height: 58.5vh;
-  width: 24vw;
+  width: 22vw;
   margin: 0;
   list-style-type: none;
   line-height: 2;
@@ -27,7 +27,7 @@ ul.cand li:visited {
 
 .info{
   color: #7549B1;
-  width: 24vw;
+  width: 22vw;
   height: 58.5vh;
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 13px;
@@ -36,7 +36,7 @@ ul.cand li:visited {
 
 .graph{
 	float:left;
-  width: 43vw;
+  width: 45vw;
   height: 80vh;
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 16px;
@@ -56,7 +56,7 @@ h1{
   float: right;
   display: inline-block;
   vertical-align: top;
-  width: 25vw;
+  width: 22vw;
 }
 
 table.cand_table{
