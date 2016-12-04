@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"abraham_linkedin/models"
 	"net/http"
 )
 
@@ -42,12 +43,28 @@ func TrendsIndex(w http.ResponseWriter, r *http.Request) {
 func ExpChange(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
+	amounts, err := models.GetExpenditureChange(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = amounts
+
 	RenderView(w, "trends#ExpChange", viewData)
 }
 
 //ConChange handles /trends/#queryName
 func ConChange(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
+
+	amounts, err := models.GetContributionChange(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = amounts
 
 	RenderView(w, "trends#ConChange", viewData)
 }
@@ -56,6 +73,14 @@ func ConChange(w http.ResponseWriter, r *http.Request) {
 func HighestSpender(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
+	amounts, err := models.GetBiggestSpender(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = amounts
+
 	RenderView(w, "trends#HighSpender", viewData)
 }
 
@@ -63,12 +88,28 @@ func HighestSpender(w http.ResponseWriter, r *http.Request) {
 func HighestContrib(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
+	amounts, err := models.GetBiggestContributor(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = amounts
+
 	RenderView(w, "trends#HighContrib", viewData)
 }
 
 //MostPaid handles /trends/#queryName
 func Mostpaid(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
+
+	amounts, err := models.GetMostPaid(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = amounts
 
 	RenderView(w, "trends#MostPaid", viewData)
 }

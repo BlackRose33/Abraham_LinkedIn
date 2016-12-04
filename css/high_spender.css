@@ -19,7 +19,7 @@
   color: #167F92;
 }
 
-.horz_nav ul a:hover{
+.horz_nav ul li a:hover{
   color: pink;
 }
 

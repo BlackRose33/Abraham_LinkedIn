@@ -9,29 +9,29 @@
 
 .horz_nav ul li{
   float: left;
-  color: #0E6655;
+  color: #68B357;
   text-align: center;
   width: 14vw;
 }
 
 .horz_nav ul a{
   text-decoration: none;
-  color: #0E6655;
+  color: #68B357;
 }
 
-.horz_nav ul a:hover{
+.horz_nav ul li a:hover{
   color: pink;
 }
 
 .horz_nav ul a:visited{
-  color: #0E6655;
+  color: #68B357;
 }
 
 p{
   padding-left: 10vw;
   padding-right: 10vw;
   text-align: center;
-  color: #0E6655;
+  color: #68B357;
 }
 
 .max_con{
@@ -46,9 +46,9 @@ table.con_table{
   width: 70%;
   overflow: hidden;
   background: #FFF;
-  color: #0E6655;
+  color: #68B357;
   border-radius: 10px;
-  border: 1px solid #0E6655;
+  border: 1px solid #68B357;
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 14px;
   line-height: 24px;
@@ -67,7 +67,7 @@ tr{
 th {
   display: none;
   border: 1px solid #FFF;
-  background-color: #0E6655;
+  background-color: #68B357;
   color: #FFF;
   padding: .5em;
   font-family: 'Vollkorn', Georgia, Times, serif;
