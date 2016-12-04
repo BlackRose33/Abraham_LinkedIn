@@ -7,9 +7,14 @@ import (
 )
 
 type candInfoViewData struct {
-	Candidate *models.CandInfo
-	Summaries []models.CandidateAmountSummary
-	History   []models.Candidacy
+	Candidate    *models.CandInfo
+	Summaries    []models.CandidateAmountSummary
+	History      []models.Candidacy
+	Contribs     []models.Contributor
+	Expenses     []models.Expense
+	Reasons      []models.Reason
+	PrizesGiven  []models.DoorPrize
+	PrizesBought []models.DoorPrize
 }
 
 // CandInfo handles candinfo/##candid
@@ -44,10 +49,45 @@ func CandInfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	topExpenses, err := models.GetTopTenExpensesForCandidate(Base.Db, args[0])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	topContribs, err := models.GetTopTenContributorsForCandidate(Base.Db, args[0])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	topReasons, err := models.GetTopReasonsForCandidate(Base.Db, args[0])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	prizesGiven, err := models.GetTopDoorPrizesGiven(Base.Db, args[0])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	prizesBought, err := models.GetTopDoorPrizesPurchased(Base.Db, args[0])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	viewData.Data = &candInfoViewData{
-		Candidate: candidateInfo,
-		Summaries: candAmountSummaries,
-		History:   candHistory,
+		Candidate:    candidateInfo,
+		Summaries:    candAmountSummaries,
+		History:      candHistory,
+		Contribs:     topContribs,
+		Expenses:     topExpenses,
+		Reasons:      topReasons,
+		PrizesGiven:  prizesGiven,
+		PrizesBought: prizesBought,
 	}
 
 	RenderView(w, "layouts#CandInfo", viewData)

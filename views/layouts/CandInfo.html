@@ -38,6 +38,79 @@
     <div id="contrib_graph"> </div>
     <h1>Expenditures</h1>
     <div id="expense_graph"> </div>
+    <h1>Top Contributors</h1>
+    <table class="cand_table" style="width: 100%; margin: 0 0 10px 0;">
+      <tr>
+        <th>Name</th>
+        <th>Total Raised</th>
+        <th>Year</th>
+      </tr>
+      {{range $i, $contrib := .Data.Contribs}}
+        <tr>
+          <td>{{$contrib.Name}}</td>
+          <td>{{price $contrib.Amount}}</td>
+          <td>{{$contrib.Year}}</td>
+        </tr>
+      {{end}}
+    </table>
+
+    <h1>Top Expenses</h1>
+    <table class="cand_table" style="width: 100%; margin: 0 0 10px 0;">
+      <tr>
+        <th>Name</th>
+        <th>Total Spent</th>
+        <th>Year</th>
+      </tr>
+      {{range $i, $expense := .Data.Expenses}}
+        <tr>
+          <td>{{$expense.Name}}</td>
+          <td>{{price $expense.Amount}}</td>
+          <td>{{$expense.Year}}</td>
+        </tr>
+      {{end}}
+    </table>
+
+    <h1>Top Expenditure Reasons</h1>
+    <table class="cand_table" style="width: 100%; margin: 0 0 10px 0;">
+      <tr>
+        <th>Reason</th>
+        <th>Times Used</th>
+      </tr>
+      {{range $i, $reason := .Data.Reasons}}
+        <tr>
+          <td>{{$reason.Str}}</td>
+          <td>{{$reason.Frequency}}</td>
+        </tr>
+      {{end}}
+    </table>
+
+    <h1>Top Door Prizes From Contributions</h1>
+    <table class="cand_table" style="width: 100%; margin: 0 0 10px 0;">
+      <tr>
+        <th>From</th>
+        <th>Value Of Prizes</th>
+      </tr>
+      {{range $i, $prize := .Data.PrizesGiven}}
+        <tr>
+          <td>{{$prize.From}}</td>
+          <td>{{price $prize.Amount}}</td>
+        </tr>
+      {{end}}
+    </table>
+
+    <h1>Top Door Prizes Purchased by Campaign</h1>
+    <table class="cand_table" style="width: 100%; margin: 0 0 10px 0;">
+      <tr>
+        <th>From</th>
+        <th>Value Of Prizes</th>
+      </tr>
+      {{range $i, $prize := .Data.PrizesBought}}
+        <tr>
+          <td>{{$prize.From}}</td>
+          <td>{{price $prize.Amount}}</td>
+        </tr>
+      {{end}}
+    </table>
   {{else}}
     <h1>Candidate Information Page</h1>
     <div>
