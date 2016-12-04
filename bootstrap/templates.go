@@ -18,6 +18,11 @@ func GetTemplates() map[string]*template.Template {
 	templates["layouts#Graphs"] = loadTemplate("views/layouts/Graphs.html")
 
 	templates["trends#index"] = loadTrendsTemplate("views/trends/index.html")
+	templates["trends#HighSpender"] = loadTrendsTemplate("views/trends/HighSpender.html")
+	templates["trends#HighContrib"] = loadTrendsTemplate("views/trends/HighContrib.html")
+	templates["trends#MostPaid"] = loadTrendsTemplate("views/trends/MostPaid.html")
+	templates["trends#ExpChange"] = loadTrendsTemplate("views/trends/ExpChange.html")
+	templates["trends#ConChange"] = loadTrendsTemplate("views/trends/ConChange.html")
 
 	return templates
 }
