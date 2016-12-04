@@ -9,6 +9,7 @@ import (
 type candInfoViewData struct {
 	Candidate *models.CandInfo
 	Summaries []models.CandidateAmountSummary
+	History   []models.Candidacy
 }
 
 // CandInfo handles candinfo/##candid
@@ -36,9 +37,17 @@ func CandInfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	candHistory, err := models.GetCandidacyHistory(Base.Db, args[0])
+	if err != nil {
+		http.Error(w, "Internal Error", http.StatusInternalServerError)
+		fmt.Println(err.Error())
+		return
+	}
+
 	viewData.Data = &candInfoViewData{
 		Candidate: candidateInfo,
 		Summaries: candAmountSummaries,
+		History:   candHistory,
 	}
 
 	RenderView(w, "layouts#CandInfo", viewData)

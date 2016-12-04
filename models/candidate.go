@@ -458,3 +458,30 @@ func GetExpenditureSummaryForCandidate(db *sql.DB, candID string) (
 
 	return summaries, nil
 }
+
+// Candidacy describes a candidate's run for elected office
+type Candidacy struct {
+	Year       int
+	OfficeCode int
+}
+
+// GetCandidacyHistory gets a list of candidacy records for a candidate
+func GetCandidacyHistory(db *sql.DB, candID string) ([]Candidacy, error) {
+	rows, err := db.Query("SELECT election_year, office_code FROM candidacy "+
+		"WHERE cand_id = ?", candID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	history := make([]Candidacy, 0, 10)
+	for rows.Next() {
+		var entry Candidacy
+		err = rows.Scan(&entry.Year, &entry.OfficeCode)
+		if err == nil {
+			history = append(history, entry)
+		}
+	}
+
+	return history, nil
+}

@@ -12,16 +12,21 @@
       <p class="alignleft"><br><br>Candidate ID: {{.Data.Candidate.Candidate.ID}}<br><br>
       Name:  {{.Data.Candidate.Candidate.FirstName}} {{.Data.Candidate.Candidate.LastName}}</p>
       <p><br>
-      <center><table class="cand_table">
-        <tr>
-          <th>Position</th>
-          <th>Year</th>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-        </tr>
-      </table></center>
+      {{if .Data.History}}
+        <center><table class="cand_table">
+          <tr>
+            <th>Position</th>
+            <th>Year</th>
+          </tr>
+          {{$names := .OfficeMap}}
+          {{range $i, $candidacy := .Data.History}}
+            <tr>
+              <td>{{index $names $candidacy.OfficeCode}}</td>
+              <td>{{$candidacy.Year}}</td>
+            </tr>
+          {{end}}
+        </table></center>
+      {{end}}
     </p>
   </div>
 </div>
