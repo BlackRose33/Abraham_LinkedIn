@@ -20,7 +20,7 @@ type Candidate struct {
 	FirstName string
 	LastName  string
 	CandClass string
-	Count			int
+	Count     int
 }
 
 // GetCandidateByID attempts to find a candidate in the database based on an
@@ -354,6 +354,7 @@ func GetContributeDates(db *sql.DB, candID string) ([]CandidateAmount, error) {
 	return amounts, nil
 }
 
+// GetMostCandClass finds the most common candidate class for candidates
 func GetMostCandClass(db *sql.DB) ([]Candidate, error) {
 	rows, err := db.Query("select cand_class, count(cand_class) " +
 		"from candidate " +
@@ -375,4 +376,85 @@ func GetMostCandClass(db *sql.DB) ([]Candidate, error) {
 	}
 
 	return amounts, nil
+}
+
+// CandidateAmountSummary describes the contribution / expenditure distribution
+// for a candidate per month for all campaigns, used for generating a graph
+type CandidateAmountSummary struct {
+	Year            int
+	Month           int
+	IsContributions bool
+	Amount          float64
+}
+
+// GetSummariesForCandidate gets an aggregate summary for a candidate per month
+// for expenditures and contributions
+func GetSummariesForCandidate(db *sql.DB, candID string) (
+	[]CandidateAmountSummary, error) {
+
+	summaries, err := GetContributionSummaryForCandidate(db, candID)
+	if err != nil {
+		return nil, err
+	}
+
+	summaries2, err := GetExpenditureSummaryForCandidate(db, candID)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, summary := range summaries2 {
+		summaries = append(summaries, summary)
+	}
+
+	return summaries, nil
+}
+
+// GetContributionSummaryForCandidate gets a list of contribution totals per
+// month for a candidate
+func GetContributionSummaryForCandidate(db *sql.DB, candID string) (
+	[]CandidateAmountSummary, error) {
+
+	rows, err := db.Query("SELECT election_year, month(STR_TO_DATE(con_date, "+
+		"'%m/%d/%Y %k:%i:%s')) mnth, sum(con_amount) FROM contributes WHERE "+
+		"cand_id = ? GROUP BY mnth, election_year", candID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	summaries := make([]CandidateAmountSummary, 0, 5)
+	for rows.Next() {
+		summary := CandidateAmountSummary{IsContributions: true}
+		err = rows.Scan(&summary.Year, &summary.Month, &summary.Amount)
+		if err == nil {
+			summaries = append(summaries, summary)
+		}
+	}
+
+	return summaries, nil
+}
+
+// GetExpenditureSummaryForCandidate gets a list of expenditure totals per
+// month for a candidate
+func GetExpenditureSummaryForCandidate(db *sql.DB, candID string) (
+	[]CandidateAmountSummary, error) {
+
+	rows, err := db.Query("SELECT election_year, month(STR_TO_DATE(exp_date, "+
+		"'%m/%d/%Y %k:%i:%s')) mnth, sum(exp_amount) FROM expenditures WHERE "+
+		"cand_id = ? GROUP BY mnth, election_year", candID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	summaries := make([]CandidateAmountSummary, 0, 5)
+	for rows.Next() {
+		summary := CandidateAmountSummary{IsContributions: false}
+		err = rows.Scan(&summary.Year, &summary.Month, &summary.Amount)
+		if err == nil {
+			summaries = append(summaries, summary)
+		}
+	}
+
+	return summaries, nil
 }

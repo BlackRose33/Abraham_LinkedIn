@@ -12,8 +12,13 @@ ul.cand {
   font-size: 16px;
 }
 
+.goog-tooltip {
+  color: black !important;
+}
+
 ul.cand li:hover {
     color: #58cce1;
+    cursor: pointer;
 }
 
 ul.cand li:visited {

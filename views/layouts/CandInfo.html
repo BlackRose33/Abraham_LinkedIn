@@ -9,8 +9,8 @@
   </div>
 
   <div class = "info">
-      <p class="alignleft"><br><br>Candidate ID: {{.Data.Candidate.ID}}<br><br>
-      Name:  {{.Data.Candidate.FirstName}} {{.Data.Candidate.LastName}}</p>
+      <p class="alignleft"><br><br>Candidate ID: {{.Data.Candidate.Candidate.ID}}<br><br>
+      Name:  {{.Data.Candidate.Candidate.FirstName}} {{.Data.Candidate.Candidate.LastName}}</p>
       <p><br>
       <center><table class="cand_table">
         <tr>
@@ -27,13 +27,30 @@
 </div>
 
 <div class = "graph">
-  <h1>Contributions</h1>
-  <!--graph code-->
-  <h1>Expenditures</h1>
+  {{if .Data.Summaries}}
+    <h1>Contributions &amp; Expenditures</h1>
+    <!--graph code-->
+    <div id="contrib_graph"> </div>
+    <h1>Expenditures</h1>
+    <div id="expense_graph"> </div>
+  {{else}}
+    <h1>Candidate Information Page</h1>
+    <div>
+      Please click on a candidate's name to the right in order to view
+      detailed information about them and the finances of their candidacies
+      over the years.
+    </div>
+  {{end}}
 </div>
 {{end}}
 
 {{define "includes"}}
+<script type="text/javascript">
+  var rawData = {{.Data.Summaries}};
+  var doChart = {{if .Data.Summaries}}true{{else}}false{{end}};
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/js/candinfo.js"></script>
 <script type="text/javascript" src="/js/heatmap.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/cand_info.css" />
 <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
