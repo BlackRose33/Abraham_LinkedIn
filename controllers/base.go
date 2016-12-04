@@ -28,6 +28,8 @@ var Base struct {
 func BaseInitialization(templates map[string]*template.Template, db *sql.DB) {
 	Base.Templates = templates
 	Base.Db = db
+
+	initTrendFunctions()
 }
 
 // BaseViewData populates view data based on the request and response writer
