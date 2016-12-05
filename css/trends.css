@@ -1,5 +1,5 @@
 ul.questions {
-  color: #ede68a;
+  color: #ffff00;
   height: 80vh;
   width: 24vw;
   margin: 0;
@@ -21,12 +21,12 @@ ul.questions li:hover {
 }
 
 ul.questions li:visited {
-    color: #ede68a;
+    color: #ffff00;
 }
 
 .questions{
   float: right;
-  color: #ede68a;
+  color: #ffff00;
   width: 25vw;
   font-family: 'Vollkorn', Georgia, Times, serif;
   font-size: 16px;
@@ -36,11 +36,53 @@ ul.questions li:visited {
 .left {
   float: left;
   vertical-align: middle;
-  color: #ede68a;
+  color: #ffff00;
   width: 45vw;
   height: 80vh;
 }
 
 h1{
   text-align: center;
+}
+
+h4{
+  text-align: center;
+}
+
+table{
+  width: 70%;
+  overflow: hidden;
+  background: #FFF;
+  color: #ffff00;
+  border-radius: 10px;
+  border: 1px solid #167F92;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+tr{
+    border: 1px solid #D9E4E6;
+}
+
+th {
+  display: none;
+  border: 1px solid #FFF;
+  background-color: #ffff00;
+  color: #000;
+  padding: .5em;
+  display: table-cell;
+  text-align: center;
+}
+
+td {
+  background: #0e0e0e;
+	border-right: 1px solid #000;
+	border-left: 1px solid #000;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	padding: .5em;
+	position: relative;
+  word-wrap: break-word;
+  box-shadow: inset 1px 0 0 #000;
 }

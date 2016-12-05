@@ -1,3 +1,19 @@
 {{define "trendBody"}}
-<h4 style="text-align: center">Highest contributor of all time</h4>
+<h4>Highest contributor of all time</h4>
+<div style="padding-top:10vh">
+  <center><table>
+    <tr>
+      <th>Contributor</th>
+      <td>{{.Data.Name}}</td>
+    </tr>
+    <tr>
+      <th>Contributed Amount</th>
+      <td>{{.Data.Amount}}</td>
+    </tr>
+    <tr>
+      <th>Election Year</th>
+      <td>{{.Data.Year}}</td>
+    </tr>
+  </table></center>
+</div>
 {{end}}

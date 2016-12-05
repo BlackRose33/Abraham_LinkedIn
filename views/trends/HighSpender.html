@@ -1,3 +1,23 @@
 {{define "trendBody"}}
-<h4 style="text-align: center">Highest spender of all time</h4>
+<h4>Highest spender of all time</h4>
+<div style="padding-top:10vh">
+  <center><table>
+    <tr>
+      <th>Candidate</th>
+      <td>{{.Data.FirstName}} {{.Data.LastName}}</td>
+    </tr>
+    <tr>
+      <th>Amount Spent</th>
+      <td>{{.Data.Amount}}</td>
+    </tr>
+    <tr>
+      <th>Position</th>
+      <td>{{index .OfficeMap .Data.OfficeCd}}</td>
+    </tr>
+    <tr>
+      <th>Election Year</th>
+      <td>{{.Data.Year}}</td>
+    </tr>
+  </table></center>
+</div>
 {{end}}
