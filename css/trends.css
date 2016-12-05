@@ -18,6 +18,7 @@ ul.questions li{
 
 ul.questions li:hover {
     color: #61b350;
+    cursor: pointer;
 }
 
 ul.questions li:visited {
