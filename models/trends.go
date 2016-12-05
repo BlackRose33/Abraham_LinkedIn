@@ -76,10 +76,52 @@ func GetBiggestContributor(db *sql.DB) (*Contributor, error) {
 	return nil, nil
 }
 
-func GetExpenditureChange(db *sql.DB) (*Contributor, error) {
-	return nil, nil
+type Trend struct {
+	Year   int
+	Amount float64
 }
 
-func GetContributionChange(db *sql.DB) (*Contributor, error) {
-	return nil, nil
+func GetExpenditureChange(db *sql.DB) ([]Trend, error) {
+	rows, err := db.Query("SELECT election_year, AVG(exp_amount) amt " +
+		"FROM expenditures GROUP BY election_year ORDER BY election_year ASC;")
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	amounts := make([]Trend, 0, 5)
+	for rows.Next() {
+		var amount Trend
+		err = rows.Scan(&amount.Year, &amount.Amount)
+		if err == nil {
+			amounts = append(amounts, amount)
+		}
+	}
+
+	return amounts, nil
+}
+
+func GetContributionChange(db *sql.DB) ([]Trend, error) {
+	rows, err := db.Query("SELECT election_year, AVG(con_amount) amt " +
+		"FROM contributes WHERE refund_date = \"\" GROUP BY election_year " +
+		"ORDER BY election_year ASC")
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	amounts := make([]Trend, 0, 5)
+	for rows.Next() {
+		var amount Trend
+		err = rows.Scan(&amount.Year, &amount.Amount)
+		if err == nil {
+			amounts = append(amounts, amount)
+		}
+	}
+
+	return amounts, nil
 }

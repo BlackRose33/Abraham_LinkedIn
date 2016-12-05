@@ -1,3 +1,17 @@
 {{define "trendBody"}}
 <h4>Change in contribution amount over the years</h4>
+<div style="padding-top:10vh">
+  <center><table>
+    <tr>
+      <th>Year</th>
+      <th>Average Contribution</th>
+    </tr>
+    {{range $i, $amount := .Data}}
+    <tr>
+      <td>{{$amount.Year}}</td>
+      <td>{{price $amount.Amount}}</td>
+    </tr>
+    {{end}}
+  </table></center>
+</div>
 {{end}}
