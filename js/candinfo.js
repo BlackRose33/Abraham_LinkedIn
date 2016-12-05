@@ -64,8 +64,6 @@
     }
   }
 
-  console.log(appearanceMap);
-
   var years = [2001, 2003, 2005, 2009, 2013];
 
   function drawChart() {

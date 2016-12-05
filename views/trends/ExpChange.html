@@ -1,6 +1,6 @@
 {{define "trendBody"}}
-<h4>Change in expenditure amount over the years</h4>
-<div style="padding-top:10vh">
+<h4 style="margin: 10px 0;">Change in expenditure amount over the years</h4>
+<div style="padding-top: 10px">
   <center><table>
     <tr>
       <th>Year</th>
@@ -14,4 +14,12 @@
     {{end}}
   </table></center>
 </div>
+<div id="graph" style="padding-top: 30px;"></div>
+{{end}}
+
+{{define "trendInclude"}}
+<script type="text/javascript">
+  var rawData = {{.Data}};
+</script>
+<script type="text/javascript" src="/js/conchange.js"></script>
 {{end}}

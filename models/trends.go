@@ -2,6 +2,7 @@ package models
 
 import "database/sql"
 
+//GetMostPaid asdfjnaoifjnoij
 func GetMostPaid(db *sql.DB) (*CandidateAmount, error) {
 	rows, err := db.Query("SELECT c2.cand_first, c2.cand_last, c1.election_year," +
 		" c1.cand_id, c1.office_code, SUM(con_amount) amt FROM contributes c," +
@@ -28,6 +29,7 @@ func GetMostPaid(db *sql.DB) (*CandidateAmount, error) {
 	return nil, nil
 }
 
+// GetBiggestSpender asdfasdfoajidsfoij
 func GetBiggestSpender(db *sql.DB) (*CandidateAmount, error) {
 	rows, err := db.Query("SELECT c2.cand_first, c2.cand_last, c1.election_year," +
 		" c1.cand_id, c1.office_code, SUM(exp_amount) amt FROM expenditures e," +
@@ -53,6 +55,7 @@ func GetBiggestSpender(db *sql.DB) (*CandidateAmount, error) {
 	return nil, nil
 }
 
+// GetBiggestContributor asdfjasdfojpoij
 func GetBiggestContributor(db *sql.DB) (*Contributor, error) {
 	rows, err := db.Query("SELECT c1.con_name, c1.election_year, SUM(c1.con_amount)" +
 		" amt FROM contributes c1, contributor c2 WHERE c1.con_name = c2.con_name AND" +
@@ -76,11 +79,13 @@ func GetBiggestContributor(db *sql.DB) (*Contributor, error) {
 	return nil, nil
 }
 
+//Trend asdfjanodsfij
 type Trend struct {
 	Year   int
 	Amount float64
 }
 
+// GetExpenditureChange aidsfjnasdfoijn
 func GetExpenditureChange(db *sql.DB) ([]Trend, error) {
 	rows, err := db.Query("SELECT election_year, AVG(exp_amount) amt " +
 		"FROM expenditures GROUP BY election_year ORDER BY election_year ASC;")
@@ -103,6 +108,7 @@ func GetExpenditureChange(db *sql.DB) ([]Trend, error) {
 	return amounts, nil
 }
 
+// GetContributionChange asdfadsfoij
 func GetContributionChange(db *sql.DB) ([]Trend, error) {
 	rows, err := db.Query("SELECT election_year, AVG(con_amount) amt " +
 		"FROM contributes WHERE refund_date = \"\" GROUP BY election_year " +

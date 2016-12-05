@@ -21,7 +21,9 @@
 {{end}}
 
 {{define "includes"}}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/trends.css" />
 <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 <script src=""></script>
+{{block "trendInclude" .}}{{end}}
 {{end}}
