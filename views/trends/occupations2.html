@@ -1,0 +1,24 @@
+{{define "trendBody"}}
+<h4 style="margin: 10px 0;">
+  Highest Average Contributions Versus Contributor Occupation
+</h4>
+<em style="display: block; margin: 10px 0;">
+  NOTE: Results are only included for occupations with at least 10
+  contributors representing the occupation
+</em>
+<div style="margin-top: 10px;">
+  <table style="width: 100%;">
+    <tr>
+      <th>Occupation</th>
+      <th>Number of Contributors</th>
+      <th>Average Contribution</th>
+    </tr>
+    {{range $i, $res := .Data}}
+      <tr>
+        <td>{{$res.Str}}</td>
+        <td>{{$res.Count}}</td>
+        <td>{{price $res.Amount}}</td>
+      </tr>
+    {{end}}
+  </table>
+{{end}}

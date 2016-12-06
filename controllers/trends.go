@@ -20,6 +20,8 @@ func initTrendFunctions() {
 		"refunds":      http.HandlerFunc(Refunds),
 		"cfptrend":     http.HandlerFunc(CFPTrend),
 		"avgcfptrend":  http.HandlerFunc(AvgCFPTrend),
+		"occupations":  http.HandlerFunc(Occupations),
+		"occupations2": http.HandlerFunc(Occupations2),
 	}
 }
 
@@ -201,4 +203,32 @@ func AvgCFPTrend(w http.ResponseWriter, r *http.Request) {
 
 	viewData.Data = res
 	RenderView(w, "trends#avgcfptrend", viewData)
+}
+
+// Occupations handles /trends/occupations
+func Occupations(w http.ResponseWriter, r *http.Request) {
+	viewData := BaseViewData(w, r)
+
+	res, err := models.GetMostCommonOccupations(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = res
+	RenderView(w, "trends#occupations", viewData)
+}
+
+// Occupations2 handles /trends/occupations2
+func Occupations2(w http.ResponseWriter, r *http.Request) {
+	viewData := BaseViewData(w, r)
+
+	res, err := models.GetHighestContribOccupations(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = res
+	RenderView(w, "trends#occupations2", viewData)
 }

@@ -1,0 +1,20 @@
+{{define "trendBody"}}
+<h4 style="margin: 10px 0;">
+  Most Common Contributor Occupations
+</h4>
+<div style="margin-top: 10px;">
+  <table style="width: 100%;">
+    <tr>
+      <th>Occupation</th>
+      <th>Number of Contributors</th>
+      <th>Average Contribution</th>
+    </tr>
+    {{range $i, $res := .Data}}
+      <tr>
+        <td>{{$res.Str}}</td>
+        <td>{{$res.Count}}</td>
+        <td>{{price $res.Amount}}</td>
+      </tr>
+    {{end}}
+  </table>
+{{end}}

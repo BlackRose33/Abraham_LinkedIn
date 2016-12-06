@@ -1,6 +1,9 @@
 package models
 
-import "database/sql"
+import (
+	"database/sql"
+	"strings"
+)
 
 //GetMostPaid asdfjnaoifjnoij
 func GetMostPaid(db *sql.DB) (*CandidateAmount, error) {
@@ -247,6 +250,64 @@ func GetAvgMatchAmountAndParticipantCount(db *sql.DB) ([]AmountAndCount, error) 
 		var item AmountAndCount
 		err = rows.Scan(&item.Amount, &item.Count, &item.Year)
 		if err == nil {
+			res = append(res, item)
+		}
+	}
+
+	return res, nil
+}
+
+// StringCount has a string and a count
+type StringCount struct {
+	Str    string
+	Count  int
+	Amount float64
+}
+
+// GetMostCommonOccupations adsfiasf
+func GetMostCommonOccupations(db *sql.DB) ([]StringCount, error) {
+	rows, err := db.Query(`SELECT occupation, COUNT(occupation), AVG(con_amount)
+		FROM (SELECT occupation, con_amount FROM contributes GROUP BY con_name)
+		occupations WHERE occupation <> ''
+    GROUP BY occupation
+    ORDER BY COUNT(occupation) DESC LIMIT 10`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	res := make([]StringCount, 0, 10)
+	for rows.Next() {
+		var item StringCount
+		err = rows.Scan(&item.Str, &item.Count, &item.Amount)
+		if err == nil {
+			item.Str = strings.Title(strings.ToLower(item.Str))
+			res = append(res, item)
+		}
+	}
+
+	return res, nil
+}
+
+// GetHighestContribOccupations adsfiasf
+func GetHighestContribOccupations(db *sql.DB) ([]StringCount, error) {
+	rows, err := db.Query(`SELECT occupation, COUNT(occupation), AVG(con_amount)
+		FROM (SELECT occupation, con_amount FROM contributes GROUP BY con_name)
+		occupations WHERE occupation <> ''
+    GROUP BY occupation
+		HAVING COUNT(occupation) > 10
+    ORDER BY AVG(con_amount) DESC LIMIT 10`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	res := make([]StringCount, 0, 10)
+	for rows.Next() {
+		var item StringCount
+		err = rows.Scan(&item.Str, &item.Count, &item.Amount)
+		if err == nil {
+			item.Str = strings.Title(strings.ToLower(item.Str))
 			res = append(res, item)
 		}
 	}
