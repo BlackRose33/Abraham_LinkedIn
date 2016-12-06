@@ -1,0 +1,54 @@
+{{define "trendInclude"}}
+  <script type="text/javascript">
+    var rawData = {{.Data}};
+  </script>
+  <script type="text/javascript" src="/js/cfptrend.js"></script>
+{{end}}
+
+{{define "trendBody"}}
+<h4 style="margin: 10px 0; text-transform: capitalize;">
+  Change In Campaign Finance Matching Over Time
+</h4>
+
+<div style="padding: 10px 0">
+  Candidates who participate in the Campaign Finance Program can have
+  their contributions matched by the Campaign Finance Board.
+  <br /><br />
+  This is information about the amount of money matched by the CFB each
+  year, as well as information about the number of candidates that participated
+  in the program that year.
+</div>
+
+<div style="padding: 10px 0">
+  <em style="display: block; font-size: 0.8em; margin: 10px 0;">
+    NOTE: Number of Participants is the number of candidates who participated
+    in the Campaign Finance Program. Amount Matched is the dollar value of
+    campaign contributions that the Campaign Finance Program matched for
+    candidates.
+  </em>
+  <table style="width: 100%">
+    <tr>
+      <th>Year</th>
+      <th>Amount Matched</th>
+      <th>Number of Participants</th>
+    </tr>
+    {{range $i, $res := .Data}}
+      <tr>
+        <td>{{$res.Year}}</td>
+        <td>{{price $res.Amount}}</td>
+        <td>{{$res.Count}}</td>
+      </tr>
+    {{end}}
+  </table>
+</div>
+
+<h4 style="margin: 10px 0;">
+  Total Amount Matched By Year
+</h4>
+<div id="graph1"></div>
+
+<h4 style="margin: 10px 0;">
+  Participant Count By Year
+</h4>
+<div id="graph2"></div>
+{{end}}

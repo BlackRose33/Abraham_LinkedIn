@@ -102,6 +102,7 @@
     dataExpense.addRows(rowsExpense);
 
     var options = {
+      titlePosition: "none",
       "hAxis": {
         title: "Month"
       },
@@ -113,6 +114,7 @@
 
 
     var options2 = {
+      titlePosition: "none",
       "hAxis": {
         title: "Month"
       },

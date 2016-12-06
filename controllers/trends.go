@@ -18,6 +18,8 @@ func initTrendFunctions() {
 		"explanations": http.HandlerFunc(Explanations),
 		"amtExpln":     http.HandlerFunc(AmtExpln),
 		"refunds":      http.HandlerFunc(Refunds),
+		"cfptrend":     http.HandlerFunc(CFPTrend),
+		"avgcfptrend":  http.HandlerFunc(AvgCFPTrend),
 	}
 }
 
@@ -171,4 +173,32 @@ func AmtExpln(w http.ResponseWriter, r *http.Request) {
 
 	viewData.Data = counts
 	RenderView(w, "trends#amtExpln", viewData)
+}
+
+// CFPTrend asdfadsfasdf
+func CFPTrend(w http.ResponseWriter, r *http.Request) {
+	viewData := BaseViewData(w, r)
+
+	res, err := models.GetMatchAmountAndParticipantCount(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = res
+	RenderView(w, "trends#cfptrend", viewData)
+}
+
+// AvgCFPTrend asdfadsfasdf
+func AvgCFPTrend(w http.ResponseWriter, r *http.Request) {
+	viewData := BaseViewData(w, r)
+
+	res, err := models.GetAvgMatchAmountAndParticipantCount(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = res
+	RenderView(w, "trends#avgcfptrend", viewData)
 }

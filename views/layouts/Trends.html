@@ -29,6 +29,12 @@
     <li onclick="window.location.href='/trends/refunds'">
       Information about refunds
     </li>
+    <li onclick="window.location.href='/trends/cfptrend'">
+      Campaign Contribution Matching Over Time
+    </li>
+    <li onclick="window.location.href='/trends/avgcfptrend'">
+      Average Campaign Contribution Matching Over Time
+    </li>
   </ul>
 </div>
 <div class="left">
@@ -42,7 +48,6 @@
 {{define "includes"}}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/trends.css" />
-<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 <script src=""></script>
 {{block "trendInclude" .}}{{end}}
 {{end}}

@@ -18,13 +18,13 @@
       data.addRows(rows);
 
       var options = {
+        titlePosition: "none",
         hAxis: {
           title: "Year"
         },
         vAxis: {
           title: "Average Amount"
-        },
-        height: 300
+        }
       };
 
       var chart = new google.visualization.LineChart(document.getElementById("graph"));

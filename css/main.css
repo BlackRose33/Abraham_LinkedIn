@@ -10,7 +10,11 @@ body {
   background-position: left;
   background-repeat: no-repeat;
 	color: white;
-  font-family: "Open Sans";
+  font-family: "Vollkorn";
+}
+
+.goog-tooltip {
+  color: black !important;
 }
 
 .header {

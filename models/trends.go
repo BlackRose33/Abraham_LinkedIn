@@ -194,3 +194,62 @@ func GetMostDelayedRefunds(db *sql.DB) ([]Refund, error) {
 	}
 	return refunds, nil
 }
+
+// AmountAndCount is used for CFP data
+type AmountAndCount struct {
+	Amount float64
+	Count  int
+	Year   int
+}
+
+// GetMatchAmountAndParticipantCount gets the number of participants and
+// amount matched from CFP program
+func GetMatchAmountAndParticipantCount(db *sql.DB) ([]AmountAndCount, error) {
+	rows, err := db.Query(`SELECT q1.match_amount, q2.num_particip,
+		q1.election_year FROM (SELECT election_year, SUM(match_amt) match_amount
+		FROM contributes WHERE match_amt > 0 GROUP BY election_year) q1,
+		(SELECT c1.election_year, COUNT(1) num_particip FROM candidacy c1,
+		candidate c2 WHERE c1.cand_id = c2.cand_id AND c2.cand_class = 'P'
+		GROUP BY c1.election_year) q2 WHERE q1.election_year = q2.election_year`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	res := make([]AmountAndCount, 0, 5)
+	for rows.Next() {
+		var item AmountAndCount
+		err = rows.Scan(&item.Amount, &item.Count, &item.Year)
+		if err == nil {
+			res = append(res, item)
+		}
+	}
+
+	return res, nil
+}
+
+// GetAvgMatchAmountAndParticipantCount gets the number of participants and
+// amount matched from CFP program
+func GetAvgMatchAmountAndParticipantCount(db *sql.DB) ([]AmountAndCount, error) {
+	rows, err := db.Query(`SELECT q1.match_amount, q2.num_particip,
+		q1.election_year FROM (SELECT election_year, AVG(match_amt) match_amount
+		FROM contributes WHERE match_amt > 0 GROUP BY election_year) q1,
+		(SELECT c1.election_year, COUNT(1) num_particip FROM candidacy c1,
+		candidate c2 WHERE c1.cand_id = c2.cand_id AND c2.cand_class = 'P'
+		GROUP BY c1.election_year) q2 WHERE q1.election_year = q2.election_year`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	res := make([]AmountAndCount, 0, 5)
+	for rows.Next() {
+		var item AmountAndCount
+		err = rows.Scan(&item.Amount, &item.Count, &item.Year)
+		if err == nil {
+			res = append(res, item)
+		}
+	}
+
+	return res, nil
+}
