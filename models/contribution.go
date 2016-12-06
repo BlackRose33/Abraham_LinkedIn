@@ -3,6 +3,7 @@ package models
 import (
 	"database/sql"
 	"fmt"
+	"strings"
 )
 
 // Contribution struct with year, amount, first name, last name, occupation
@@ -188,13 +189,15 @@ func GetTopTenExpensesForCandidate(db *sql.DB, candID string) ([]Expense,
 type Reason struct {
 	Str       string
 	Frequency int
+	Amount    float64
 }
 
 // GetTopReasonsForCandidate gets top explanations for expenditures for a
 // campaign
 func GetTopReasonsForCandidate(db *sql.DB, candID string) ([]Reason, error) {
-	rows, err := db.Query("SELECT explanation, count(1) cnt FROM expenditures "+
-		"WHERE cand_id = ? GROUP BY explanation ORDER BY cnt DESC LIMIT 10", candID)
+	rows, err := db.Query("SELECT explanation, count(1) cnt, sum(exp_amount) "+
+		"FROM expenditures WHERE cand_id = ? GROUP BY explanation ORDER BY cnt "+
+		"DESC LIMIT 10", candID)
 	if err != nil {
 		return nil, err
 	}
@@ -203,8 +206,33 @@ func GetTopReasonsForCandidate(db *sql.DB, candID string) ([]Reason, error) {
 	reasons := make([]Reason, 0, 10)
 	for rows.Next() {
 		var reason Reason
-		err = rows.Scan(&reason.Str, &reason.Frequency)
+		err = rows.Scan(&reason.Str, &reason.Frequency, &reason.Amount)
 		if err == nil {
+			reason.Str = strings.Title(strings.ToLower(reason.Str))
+			reasons = append(reasons, reason)
+		}
+	}
+
+	return reasons, nil
+}
+
+// GetPriceyReasonsForCandidate gets top explanations for expenditures for a
+// campaign
+func GetPriceyReasonsForCandidate(db *sql.DB, candID string) ([]Reason, error) {
+	rows, err := db.Query("SELECT explanation, count(1), sum(exp_amount) amt "+
+		"FROM expenditures WHERE cand_id = ? GROUP BY explanation ORDER BY amt "+
+		"DESC LIMIT 10", candID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	reasons := make([]Reason, 0, 10)
+	for rows.Next() {
+		var reason Reason
+		err = rows.Scan(&reason.Str, &reason.Frequency, &reason.Amount)
+		if err == nil {
+			reason.Str = strings.Title(strings.ToLower(reason.Str))
 			reasons = append(reasons, reason)
 		}
 	}

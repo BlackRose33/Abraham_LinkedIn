@@ -30,6 +30,25 @@
             </tr>
           {{end}}
         </table></center>
+        {{end}}
+        {{if .Data.CFPData}}
+        <center><table class="cand_table" style="margin-top: 30px;">
+          <tr>
+            <th>Amount Matched</th>
+            <th>CFP Status</th>
+          </tr>
+          <tr>
+            <td>{{price .Data.CFPData.AmountMatched}}</td>
+            <td>{{.Data.CFPData.ParticipStatus}}</td>
+          </tr>
+        </table>
+        <em style="font-size: 0.8em; display: block; margin-top: 5px;">
+          NOTE: Amount Matched is the amount of money the Campaign Finance
+          Program has matched from contributions to the candidate. CFP Status
+          represents whether or not the candidate participated in the
+          Campaign Finance Program.
+        </em>
+      </center>
       {{end}}
     </p>
   </div>
@@ -46,7 +65,7 @@
     <h1>Top Contributors</h1>
     <table class="cand_table" style="width: 100%; margin: 0 0 10px 0;">
       <tr>
-        <th>Name</th>
+        <th>Contributor</th>
         <th>Total Raised</th>
         <th>Year</th>
       </tr>
@@ -62,7 +81,7 @@
     <h1>Top Expenses</h1>
     <table class="cand_table" style="width: 100%; margin: 0 0 10px 0;">
       <tr>
-        <th>Name</th>
+        <th>Paid To The Order Of</th>
         <th>Total Spent</th>
         <th>Year</th>
       </tr>
@@ -75,17 +94,34 @@
       {{end}}
     </table>
 
-    <h1>Top Expenditure Reasons</h1>
+    <h1>Most Common Expenditure Reasons</h1>
     <table class="cand_table" style="width: 100%; margin: 0 0 10px 0;">
       <tr>
         <th>Reason</th>
         <th>Times Used</th>
+        <th>Amount Spent</th>
       </tr>
       {{range $i, $reason := .Data.Reasons}}
         <tr>
           <td>{{$reason.Str}}</td>
           <td>{{$reason.Frequency}}</td>
+          <td>{{price $reason.Amount}}</td>
         </tr>
+      {{end}}
+    </table>
+
+    <h1>Reasons Under Which Candidate Spent The Most</h1>
+    <table class="cand_table" style="width: 100%; margin: 0 0 10px 0;">
+      <tr>
+        <th>Reason</th>
+        <th>Times Used</th>
+        <th>Amount Spent</th>
+      </tr>
+      {{range $i, $reason := .Data.Reasons2}}
+        <tr>
+          <td>{{$reason.Str}}</td>
+          <td>{{$reason.Frequency}}</td>
+          <td>{{price $reason.Amount}}</td>
       {{end}}
     </table>
 

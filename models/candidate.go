@@ -439,3 +439,45 @@ func GetCandidacyHistory(db *sql.DB, candID string) ([]Candidacy, error) {
 
 	return history, nil
 }
+
+// CandidateCFPData contains data about money a candidate has earned through
+// the campaign finance program
+type CandidateCFPData struct {
+	First          string
+	Last           string
+	ParticipStatus string
+	AmountMatched  float64
+}
+
+// GetCandCFPData asdfiauhdfiaeu
+func GetCandCFPData(db *sql.DB, candID string) (*CandidateCFPData, error) {
+	rows, err := db.Query(`SELECT c1.cand_first, c1.cand_last, c1.cand_class,
+		sum(c2.match_amt) from candidate c1, contributes c2 WHERE c1.cand_id =
+		c2.cand_id AND c1.cand_id = ? AND c2.match_amt > 0`, candID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	if rows.Next() {
+		var data CandidateCFPData
+		err = rows.Scan(&data.First, &data.Last, &data.ParticipStatus,
+			&data.AmountMatched)
+		if err == nil {
+			switch data.ParticipStatus {
+			case "P":
+				data.ParticipStatus = "Participant"
+			case "NP":
+				data.ParticipStatus = "Non-participant"
+			case "UN":
+				if data.AmountMatched != 0 {
+					data.ParticipStatus = "Participant"
+				} else {
+					data.ParticipStatus = "Undeclared"
+				}
+			}
+			return &data, nil
+		}
+	}
+	return nil, nil
+}

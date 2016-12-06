@@ -13,8 +13,10 @@ type candInfoViewData struct {
 	Contribs     []models.Contributor
 	Expenses     []models.Expense
 	Reasons      []models.Reason
+	Reasons2     []models.Reason
 	PrizesGiven  []models.DoorPrize
 	PrizesBought []models.DoorPrize
+	CFPData      *models.CandidateCFPData
 }
 
 // CandInfo handles candinfo/##candid
@@ -67,6 +69,12 @@ func CandInfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	topReasons2, err := models.GetPriceyReasonsForCandidate(Base.Db, args[0])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	prizesGiven, err := models.GetTopDoorPrizesGiven(Base.Db, args[0])
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -79,6 +87,12 @@ func CandInfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	cfpData, err := models.GetCandCFPData(Base.Db, args[0])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	viewData.Data = &candInfoViewData{
 		Candidate:    candidateInfo,
 		Summaries:    candAmountSummaries,
@@ -86,8 +100,10 @@ func CandInfo(w http.ResponseWriter, r *http.Request) {
 		Contribs:     topContribs,
 		Expenses:     topExpenses,
 		Reasons:      topReasons,
+		Reasons2:     topReasons2,
 		PrizesGiven:  prizesGiven,
 		PrizesBought: prizesBought,
+		CFPData:      cfpData,
 	}
 
 	RenderView(w, "layouts#CandInfo", viewData)

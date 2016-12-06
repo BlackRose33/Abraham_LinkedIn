@@ -44,17 +44,23 @@ $(document).ready(function() {
     for(var i = 0; i < candidateList.length; i++)
     {
       var checks = candidateList[i].toLowerCase().split(" ");
-      for(var j = 0; j < checks.length; j++)
+      for(var j = 0; j < parts.length; j++)
       {
-        for(var k = 0; k < parts.length; k++)
+        var foundOneForPart = false;
+        for(var k = 0; k < checks.length; k++)
         {
-          if(checks[j].indexOf(parts[k]) > -1)
+          if(checks[k].indexOf(parts[j]) > -1)
           {
-            results.push(candidateList[i]);
-            continue mainLoop;
+            foundOneForPart = true;
+            break;
           }
         }
+        if(!foundOneForPart)
+        {
+          continue mainLoop;
+        }
       }
+      results.push(candidateList[i]);
     }
 
     return results;
