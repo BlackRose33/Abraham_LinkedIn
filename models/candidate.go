@@ -453,7 +453,7 @@ type CandidateCFPData struct {
 func GetCandCFPData(db *sql.DB, candID string) (*CandidateCFPData, error) {
 	rows, err := db.Query(`SELECT c1.cand_first, c1.cand_last, c1.cand_class,
 		sum(c2.match_amt) from candidate c1, contributes c2 WHERE c1.cand_id =
-		c2.cand_id AND c1.cand_id = ? AND c2.match_amt > 0`, candID)
+		c2.cand_id AND c1.cand_id = ? AND c2.match_amt >= 0`, candID)
 	if err != nil {
 		return nil, err
 	}
@@ -464,15 +464,15 @@ func GetCandCFPData(db *sql.DB, candID string) (*CandidateCFPData, error) {
 		err = rows.Scan(&data.First, &data.Last, &data.ParticipStatus,
 			&data.AmountMatched)
 		if err == nil {
-			switch data.ParticipStatus {
-			case "P":
+			if data.AmountMatched != 0 {
 				data.ParticipStatus = "Participant"
-			case "NP":
-				data.ParticipStatus = "Non-participant"
-			case "UN":
-				if data.AmountMatched != 0 {
+			} else {
+				switch data.ParticipStatus {
+				case "P":
 					data.ParticipStatus = "Participant"
-				} else {
+				case "NP":
+					data.ParticipStatus = "Non-Participant"
+				case "UN":
 					data.ParticipStatus = "Undeclared"
 				}
 			}
