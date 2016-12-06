@@ -5,11 +5,24 @@
 {{define "body"}}
 <div>
   <ul class = "questions">
-    <li onclick="window.location.href='/trends/ExpChange'">Change in expenditure amount over the years</li>
-    <li onclick="window.location.href='/trends/ConChange'">Change in contribution amount over the years</li>
-    <li onclick="window.location.href='/trends/HighSpender'">Highest spender of all time</li>
-    <li onclick="window.location.href='/trends/HighContrib'">Highest contributor of all time</li>
-    <li onclick="window.location.href='/trends/MostPaid'">Most paid candidate of all time</li>
+    <li onclick="window.location.href='/trends/ExpChange'">
+      Change in expenditure amount over the years
+    </li>
+    <li onclick="window.location.href='/trends/ConChange'">
+      Change in contribution amount over the years
+    </li>
+    <li onclick="window.location.href='/trends/HighSpender'">
+      Candidate with the most expenditures a single campaign
+    </li>
+    <li onclick="window.location.href='/trends/HighContrib'">
+      Highest Contributor of all time for a single campaign
+    </li>
+    <li onclick="window.location.href='/trends/MostPaid'">
+      Candidate that received the most contributions in a single campaign
+    </li>
+    <li onclick="window.location.href='/trends/explanations'">
+      Most common explanations for campaign expenses
+    </li>
   </ul>
 </div>
 <div class="left">
@@ -21,7 +34,9 @@
 {{end}}
 
 {{define "includes"}}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/trends.css" />
 <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 <script src=""></script>
+{{block "trendInclude" .}}{{end}}
 {{end}}

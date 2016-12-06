@@ -14,10 +14,12 @@ ul.questions {
 
 ul.questions li{
   padding: 10px 0px;
+  text-transform: capitalize;
 }
 
 ul.questions li:hover {
     color: #61b350;
+    cursor: pointer;
 }
 
 ul.questions li:visited {
@@ -37,7 +39,7 @@ ul.questions li:visited {
   float: left;
   vertical-align: middle;
   color: #ffff00;
-  width: 45vw;
+  width: 44vw;
   height: 80vh;
 }
 
