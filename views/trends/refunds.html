@@ -1,0 +1,57 @@
+{{define "trendBody"}}
+  <h1 style="margin: 10px 0; text-transform: capitalize;">
+    Biggest Refunds
+  </h1>
+
+  <table style="width: 100%;">
+    <tr>
+      <th>Candidate</th>
+      <th>Election Year</th>
+      <th>Contributor</th>
+      <th>Refund Amount</th>
+      <th>Time Elapsed</th>
+    </tr>
+    {{range $i, $refund := .Data.ByAmount}}
+      <tr>
+        <td>{{$refund.CanFName}} {{$refund.CanLName}}</td>
+        <td>{{$refund.Year}}</td>
+        <td>{{$refund.ContribName}}</td>
+        <td>{{price $refund.Amount}}</td>
+        <td>{{$refund.DaysPassed}}</td>
+      </tr>
+    {{end}}
+  </table>
+
+  <em style="font-size: 0.8em">
+    NOTE: Time elapsed is the number of days between the date of the initial
+    contribution and the date of the refund.
+  </em>
+
+  <h1 style="margin: 10px 0; text-transform: capitalize;">
+    Most Delayed Refund
+  </h1>
+
+  <table style="width: 100%;">
+    <tr>
+      <th>Candidate</th>
+      <th>Election Year</th>
+      <th>Contributor</th>
+      <th>Refund Amount</th>
+      <th>Time Elapsed</th>
+    </tr>
+    {{range $i, $refund := .Data.ByTimeElapsed}}
+      <tr>
+        <td>{{$refund.CanFName}} {{$refund.CanLName}}</td>
+        <td>{{$refund.Year}}</td>
+        <td>{{$refund.ContribName}}</td>
+        <td>{{price $refund.Amount}}</td>
+        <td>{{$refund.DaysPassed}}</td>
+      </tr>
+    {{end}}
+  </table>
+
+  <em style="font-size: 0.8em">
+    NOTE: Time elapsed is the number of days between the date of the initial
+    contribution and the date of the refund.
+  </em>
+{{end}}

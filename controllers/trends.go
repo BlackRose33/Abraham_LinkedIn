@@ -16,6 +16,7 @@ func initTrendFunctions() {
 		"HighContrib":  http.HandlerFunc(HighestContrib),
 		"MostPaid":     http.HandlerFunc(Mostpaid),
 		"explanations": http.HandlerFunc(Explanations),
+		"refunds":      http.HandlerFunc(Refunds),
 	}
 }
 
@@ -127,4 +128,32 @@ func Explanations(w http.ResponseWriter, r *http.Request) {
 
 	viewData.Data = explanations
 	RenderView(w, "trends#explanations", viewData)
+}
+
+type refundViewData struct {
+	ByAmount      []models.Refund
+	ByTimeElapsed []models.Refund
+}
+
+// Refunds handles trends/refunds
+func Refunds(w http.ResponseWriter, r *http.Request) {
+	viewData := BaseViewData(w, r)
+
+	byamount, err := models.GetBiggestRefunds(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	bytimeelapsed, err := models.GetMostDelayedRefunds(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = &refundViewData{
+		ByAmount:      byamount,
+		ByTimeElapsed: bytimeelapsed,
+	}
+	RenderView(w, "trends#refunds", viewData)
 }

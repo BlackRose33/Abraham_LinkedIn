@@ -57,6 +57,7 @@ func GetBiggestSpender(db *sql.DB) (*CandidateAmount, error) {
 
 // GetBiggestContributor asdfjasdfojpoij
 func GetBiggestContributor(db *sql.DB) (*Contributor, error) {
+
 	rows, err := db.Query("SELECT c1.con_name, c1.election_year, SUM(c1.con_amount)" +
 		" amt FROM contributes c1, contributor c2 WHERE c1.con_name = c2.con_name AND" +
 		" c1.refund_date = \"\" GROUP BY c2.con_name, c1.election_year ORDER BY amt" +
@@ -130,4 +131,66 @@ func GetContributionChange(db *sql.DB) ([]Trend, error) {
 	}
 
 	return amounts, nil
+}
+
+// Refund contains information about a refund given by a candidate
+type Refund struct {
+	CanFName    string
+	CanLName    string
+	ContribName string
+	Amount      float64
+	Year        int
+	DaysPassed  int
+}
+
+// GetBiggestRefunds gets information about the refunds with the largest
+// monetary value from the database
+func GetBiggestRefunds(db *sql.DB) ([]Refund, error) {
+	rows, err := db.Query("SELECT c1.cand_first, c1.cand_last, c2.con_name, " +
+		"ABS(c2.con_amount) amt, DATEDIFF(" +
+		"STR_TO_DATE(c2.refund_date, '%m/%d/%Y %k:%i:%s'), " +
+		"STR_TO_DATE(c2.con_date, '%m/%d/%Y %k:%i:%s')) time_gap, " +
+		"c2.election_year FROM candidate c1, contributes c2 WHERE " +
+		"c1.cand_id = c2.cand_id AND sched = 'M' ORDER BY amt DESC LIMIT 10")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	refunds := make([]Refund, 0, 10)
+	for rows.Next() {
+		var refund Refund
+		err = rows.Scan(&refund.CanFName, &refund.CanLName, &refund.ContribName,
+			&refund.Amount, &refund.DaysPassed, &refund.Year)
+		if err == nil {
+			refunds = append(refunds, refund)
+		}
+	}
+	return refunds, nil
+}
+
+// GetMostDelayedRefunds gets information about the refunds with the largest
+// time gap from contribution to refund from the database
+func GetMostDelayedRefunds(db *sql.DB) ([]Refund, error) {
+	rows, err := db.Query("SELECT c1.cand_first, c1.cand_last, c2.con_name, " +
+		"ABS(c2.con_amount) amt, DATEDIFF(" +
+		"STR_TO_DATE(c2.refund_date, '%m/%d/%Y %k:%i:%s'), " +
+		"STR_TO_DATE(c2.con_date, '%m/%d/%Y %k:%i:%s')) time_gap, " +
+		"c2.election_year FROM candidate c1, contributes c2 WHERE " +
+		"c1.cand_id = c2.cand_id AND sched = 'M' ORDER BY time_gap DESC LIMIT 10")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	refunds := make([]Refund, 0, 10)
+	for rows.Next() {
+		var refund Refund
+		err = rows.Scan(&refund.CanFName, &refund.CanLName, &refund.ContribName,
+			&refund.Amount, &refund.DaysPassed, &refund.Year)
+		if err == nil {
+			refunds = append(refunds, refund)
+		}
+	}
+	return refunds, nil
 }
