@@ -1,0 +1,22 @@
+{{define "trendBody"}}
+  <h4 style="margin: 10px 0; text-transform: capitalize;">
+    Explanations under which campaigns spent the most money
+  </h4>
+
+  <div style="padding: 10px 0">
+    <table style="width: 100%">
+      <tr>
+        <th>Explanation</th>
+        <th>Times Used</th>
+        <th>Amount Spent</th>
+      </tr>
+      {{range $i, $count := .Data}}
+        <tr>
+          <td>{{$count.Explanation}}</td>
+          <td>{{$count.Count}}</td>
+          <td>{{price $count.Amount}}</td>
+        </tr>
+      {{end}}
+    </table>
+  </div>
+{{end}}

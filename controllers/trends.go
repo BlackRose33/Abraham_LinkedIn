@@ -16,6 +16,7 @@ func initTrendFunctions() {
 		"HighContrib":  http.HandlerFunc(HighestContrib),
 		"MostPaid":     http.HandlerFunc(Mostpaid),
 		"explanations": http.HandlerFunc(Explanations),
+		"amtExpln":     http.HandlerFunc(AmtExpln),
 		"refunds":      http.HandlerFunc(Refunds),
 	}
 }
@@ -156,4 +157,18 @@ func Refunds(w http.ResponseWriter, r *http.Request) {
 		ByTimeElapsed: bytimeelapsed,
 	}
 	RenderView(w, "trends#refunds", viewData)
+}
+
+// AmtExpln asdfadsf
+func AmtExpln(w http.ResponseWriter, r *http.Request) {
+	viewData := BaseViewData(w, r)
+
+	counts, err := models.GetExpensiveExplanations(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = counts
+	RenderView(w, "trends#amtExpln", viewData)
 }

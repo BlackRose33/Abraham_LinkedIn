@@ -2,16 +2,18 @@
   <h4 style="margin: 10px 0">
     Most Common Explanations
   </h4>
-  <div style="padding: 30px 0">
+  <div style="padding: 10px 0">
     <table style="width: 100%; margin: auto">
       <tr>
         <th>Explanation</th>
         <th>Times Used</th>
+        <th>Amount Spent</th>
       </tr>
       {{range $i, $explanation := .Data}}
         <tr>
           <td>{{$explanation.Explanation}}</td>
           <td>{{$explanation.Count}}</td>
+          <td>{{price $explanation.Amount}}</td>
         </tr>
       {{end}}
     </table>
