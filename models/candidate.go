@@ -2,18 +2,6 @@ package models
 
 import "database/sql"
 
-// CandInfo werhiqweriun
-type CandInfo struct {
-	Candidate Candidate
-	Position  []Positions
-}
-
-// Positions aweiurnhalewj r
-type Positions struct {
-	OfficeCd int
-	Year     int
-}
-
 // Candidate encompasses fields that describe political candidates
 type Candidate struct {
 	ID        string
@@ -41,53 +29,6 @@ func GetCandidateByID(db *sql.DB, id string) (*Candidate, error) {
 		}
 	}
 
-	return nil, nil
-}
-
-// GetCandidateByIDWithInfo attempts to find a candidate in the database based on
-// an ID
-func GetCandidateByIDWithInfo(db *sql.DB, id string) (*CandInfo, error) {
-	if id == "" {
-		var candidate CandInfo
-		candidate.Candidate.ID = " "
-		candidate.Candidate.FirstName = " "
-		candidate.Candidate.LastName = " "
-		candidate.Position = []Positions{}
-		return &candidate, nil
-	}
-
-	rows, err := db.Query("SELECT cand_id, cand_first, cand_last FROM "+
-		"candidate WHERE cand_id = ?", id)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	if rows.Next() {
-		var candidate CandInfo
-		err = rows.Scan(&candidate.Candidate.ID, &candidate.Candidate.FirstName, &candidate.Candidate.LastName)
-		if err != nil {
-			return nil, err
-		}
-
-		rows2, err := db.Query("SELECT office_code, election_year FROM candidacy WHERE cand_id = ?", id)
-		if err != nil {
-			return nil, err
-		}
-		defer rows2.Close()
-
-		positions := make([]Positions, 0, 4)
-		for rows2.Next() {
-			var pos Positions
-			err = rows2.Scan(&pos.OfficeCd, &pos.Year)
-			if err == nil {
-				positions = append(positions, pos)
-			}
-		}
-		candidate.Position = positions
-
-		return &candidate, nil
-	}
 	return nil, nil
 }
 
@@ -150,50 +91,6 @@ func GetCandidateContributionsForEachYear(db *sql.DB, candID string) (
 	return amounts, nil
 }
 
-// GetTotalAmountThisCandidateContributed get total amount that this candidate (ex. 605) contributed (ex. $999999)
-func GetTotalAmountThisCandidateContributed(db *sql.DB, candID string) (*CandidateAmount, error) {
-	rows, err := db.Query("select cand_id, sum(con_amount) "+
-		"from contributes "+
-		"where cand_id = ?", candID)
-
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	if rows.Next() {
-		var contributes CandidateAmount
-		err = rows.Scan(&contributes.EntityName, &contributes.Amount)
-		if err == nil {
-			return &contributes, nil
-		}
-	}
-	return nil, nil
-}
-
-// GetTotalAmountThisCandidateReceived get total amount this candidate (ex. 605) received
-func GetTotalAmountThisCandidateReceived(db *sql.DB, candID string) (*CandidateAmount, error) {
-	rows, err := db.Query("select cand_id, exp_amount, sum(exp_amount) "+
-		"from expenditures "+
-		"where cand_id = ?", candID)
-
-	if err != nil {
-		return nil, err
-	}
-
-	defer rows.Close()
-
-	if rows.Next() {
-		var contribution CandidateAmount
-		err = rows.Scan(&contribution.ID, &contribution.EntityName,
-			&contribution.Amount)
-		if err == nil {
-			return &contribution, nil
-		}
-	}
-	return nil, nil
-}
-
 // GetHighestSpenderByPositionForYear ecnj eroiubhcriuqbherioucuebwcriuqriu
 func GetHighestSpenderByPositionForYear(db *sql.DB, year int) ([]CandidateAmount,
 	error) {
@@ -250,56 +147,6 @@ func GetHighestPaidByPositionForYear(db *sql.DB, year int) ([]CandidateAmount,
 		var amount CandidateAmount
 		err = rows.Scan(&amount.Year, &amount.ID, &amount.OfficeCd, &amount.Amount,
 			&amount.FirstName, &amount.LastName, &amount.EntityName)
-		if err == nil {
-			amounts = append(amounts, amount)
-		}
-	}
-
-	return amounts, nil
-}
-
-// GetTotalAmountThisCandidateContributedEachYear get total amount this candidate (ex. 605) contributed each year
-func GetTotalAmountThisCandidateContributedEachYear(db *sql.DB, candID string) ([]CandidateAmount, error) {
-	rows, err := db.Query("select cand_id, sum(con_amount), election_year "+
-		"from contributes "+
-		"where cand_id = ? "+
-		"group by election_year "+
-		"order by election_year desc", candID)
-
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	amounts := make([]CandidateAmount, 0, 5)
-	for rows.Next() {
-		var amount CandidateAmount
-		err = rows.Scan(&amount.ID, &amount.Amount, &amount.Year)
-		if err == nil {
-			amounts = append(amounts, amount)
-		}
-	}
-
-	return amounts, nil
-}
-
-// GetContributeDates gets the dates of this candidate's contributions
-func GetContributeDates(db *sql.DB, candID string) ([]CandidateAmount, error) {
-	rows, err := db.Query("select cand_id, str_to_date(con_date, '%m/%d/%Y %k:%i:%s') as dt " +
-		" from contributes " +
-		" where cand_id = ? " +
-		" group by dt " +
-		" order by dt asc")
-
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	amounts := make([]CandidateAmount, 0, 110)
-	for rows.Next() {
-		var amount CandidateAmount
-		err = rows.Scan(&amount.ID, &amount.EntityName)
 		if err == nil {
 			amounts = append(amounts, amount)
 		}

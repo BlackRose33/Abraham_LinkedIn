@@ -7,14 +7,17 @@
   <div>
     <ul id="candidateList" class="cand">
       <li>
-        <input type="text" style="width: 90%; padding: 0.3em; margin-bottom: 4px;" placeholder="Filter" onkeyup="filter(this)" />
+        <input type="text"
+          style="width: 90%; padding: 0.3em; margin-bottom: 4px;"
+          placeholder="Filter"
+          onkeyup="filter(this)" />
       </li>
     </ul>
   </div>
 
   <div class = "info">
-      <p class="alignleft"><br><br>Candidate ID: {{.Data.Candidate.Candidate.ID}}<br><br>
-      Name:  {{.Data.Candidate.Candidate.FirstName}} {{.Data.Candidate.Candidate.LastName}}</p>
+      <p class="alignleft"><br><br>Candidate ID: {{.Data.Candidate.ID}}<br><br>
+      Name:  {{.Data.Candidate.FirstName}} {{.Data.Candidate.LastName}}</p>
       <p><br>
       {{if .Data.History}}
         <center><table class="cand_table">

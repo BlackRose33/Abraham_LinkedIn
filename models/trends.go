@@ -11,7 +11,7 @@ func GetMostPaid(db *sql.DB) (*CandidateAmount, error) {
 		" c1.cand_id, c1.office_code, SUM(con_amount) amt FROM contributes c," +
 		" candidacy c1, candidate c2 WHERE c.cand_id = c2.cand_id AND" +
 		" c.cand_id = c1.cand_id AND c.election_year = c1.election_year AND" +
-		" c.refund_date = \"\" GROUP BY c.cand_id, c.election_year ORDER BY amt DESC" +
+		" c.sched <> 'M' GROUP BY c.cand_id, c.election_year ORDER BY amt DESC" +
 		" limit 1")
 
 	if err != nil {
@@ -63,7 +63,7 @@ func GetBiggestContributor(db *sql.DB) (*Contributor, error) {
 
 	rows, err := db.Query("SELECT c1.con_name, c1.election_year, SUM(c1.con_amount)" +
 		" amt FROM contributes c1, contributor c2 WHERE c1.con_name = c2.con_name AND" +
-		" c1.refund_date = \"\" GROUP BY c2.con_name, c1.election_year ORDER BY amt" +
+		" c1.sched <> 'M' GROUP BY c2.con_name, c1.election_year ORDER BY amt" +
 		" DESC limit 1")
 
 	if err != nil {
@@ -115,7 +115,7 @@ func GetExpenditureChange(db *sql.DB) ([]Trend, error) {
 // GetContributionChange asdfadsfoij
 func GetContributionChange(db *sql.DB) ([]Trend, error) {
 	rows, err := db.Query("SELECT election_year, AVG(con_amount) amt " +
-		"FROM contributes WHERE refund_date = \"\" GROUP BY election_year " +
+		"FROM contributes WHERE sched <> 'M' GROUP BY election_year " +
 		"ORDER BY election_year ASC")
 
 	if err != nil {

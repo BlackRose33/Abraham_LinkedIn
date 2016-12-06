@@ -1,16 +1,11 @@
 package controllers
 
 import (
-	"abraham_linkedin/models"
 	"net/http"
 	"strings"
 )
 
-type homeData struct {
-	CandInfo *models.CandInfo
-}
-
-// Home is the index page for the admin panel
+// Home is the index page
 func Home(w http.ResponseWriter, r *http.Request) {
 	args := URIArgs(r)
 
@@ -21,20 +16,5 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	id := "605"
-	if len(args) > 0 {
-		id = args[0]
-	}
-
-	candidate, err := models.GetCandidateByIDWithInfo(Base.Db, id)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	viewData := BaseViewData(w, r)
-	viewData.Data = &homeData{
-		CandInfo: candidate,
-	}
-	RenderView(w, "home#index", viewData)
+	RenderView(w, "home#index", BaseViewData(w, r))
 }
