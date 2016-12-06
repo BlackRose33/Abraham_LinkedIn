@@ -9,12 +9,13 @@ var trendFunctions map[string]http.Handler
 
 func initTrendFunctions() {
 	trendFunctions = map[string]http.Handler{
-		"": 						http.HandlerFunc(TrendsIndex),
-		"ExpChange": 		http.HandlerFunc(ExpChange),
-		"ConChange": 		http.HandlerFunc(ConChange),
-		"HighSpender": 	http.HandlerFunc(HighestSpender),
-		"HighContrib": 	http.HandlerFunc(HighestContrib),
-		"MostPaid": 		http.HandlerFunc(Mostpaid),
+		"":             http.HandlerFunc(TrendsIndex),
+		"ExpChange":    http.HandlerFunc(ExpChange),
+		"ConChange":    http.HandlerFunc(ConChange),
+		"HighSpender":  http.HandlerFunc(HighestSpender),
+		"HighContrib":  http.HandlerFunc(HighestContrib),
+		"MostPaid":     http.HandlerFunc(Mostpaid),
+		"explanations": http.HandlerFunc(Explanations),
 	}
 }
 
@@ -69,7 +70,7 @@ func ConChange(w http.ResponseWriter, r *http.Request) {
 	RenderView(w, "trends#ConChange", viewData)
 }
 
-//HighSpender handles /trends/#queryName
+//HighestSpender handles /trends/#queryName
 func HighestSpender(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
@@ -84,7 +85,7 @@ func HighestSpender(w http.ResponseWriter, r *http.Request) {
 	RenderView(w, "trends#HighSpender", viewData)
 }
 
-//HighContrib handles /trends/#queryName
+//HighestContrib handles /trends/#queryName
 func HighestContrib(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
@@ -99,7 +100,7 @@ func HighestContrib(w http.ResponseWriter, r *http.Request) {
 	RenderView(w, "trends#HighContrib", viewData)
 }
 
-//MostPaid handles /trends/#queryName
+//Mostpaid handles /trends/#queryName
 func Mostpaid(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
@@ -112,4 +113,18 @@ func Mostpaid(w http.ResponseWriter, r *http.Request) {
 	viewData.Data = amounts
 
 	RenderView(w, "trends#MostPaid", viewData)
+}
+
+// Explanations handles trends/explanations
+func Explanations(w http.ResponseWriter, r *http.Request) {
+	viewData := BaseViewData(w, r)
+
+	explanations, err := models.GetExplanationCounts(Base.Db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	viewData.Data = explanations
+	RenderView(w, "trends#explanations", viewData)
 }

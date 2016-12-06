@@ -1,6 +1,9 @@
 package models
 
-import "database/sql"
+import (
+	"database/sql"
+	"strings"
+)
 
 // ExplanationCount represents the amount of times an explanation was used
 // for an expenditure
@@ -11,8 +14,8 @@ type ExplanationCount struct {
 
 // GetExplanationCounts gets the frequency of each explanation
 func GetExplanationCounts(db *sql.DB) ([]ExplanationCount, error) {
-	rows, err := db.Query("SELECT explanation, COUNT(explanation) " +
-		"FROM expenditures GROUP BY explanation ORDER BY COUNT(explanation) DESC")
+	rows, err := db.Query("SELECT explanation, COUNT(1) FROM expenditures " +
+		"GROUP BY explanation HAVING COUNT(1) > 2 ORDER BY COUNT(1) DESC LIMIT 40")
 	if err != nil {
 		return nil, err
 	}
@@ -23,6 +26,7 @@ func GetExplanationCounts(db *sql.DB) ([]ExplanationCount, error) {
 		var count ExplanationCount
 		err = rows.Scan(&count.Explanation, &count.Count)
 		if err == nil {
+			count.Explanation = strings.Title(strings.ToLower(count.Explanation))
 			counts = append(counts, count)
 		}
 	}

@@ -14,6 +14,7 @@ ul.questions {
 
 ul.questions li{
   padding: 10px 0px;
+  text-transform: capitalize;
 }
 
 ul.questions li:hover {
