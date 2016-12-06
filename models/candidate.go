@@ -123,52 +123,6 @@ type CandidateAmount struct {
 	OfficeCd   int
 }
 
-// GetBiggestSpenderOfAnyYear gets the... biggest spender of any year?
-func GetBiggestSpenderOfAnyYear(db *sql.DB) (*CandidateAmount, error) {
-	rows, err := db.Query("select e.exp_name, e.exp_amount, e.election_year, " +
-		"e.cand_id, c.cand_first, c.cand_last " +
-		"from expenditures e join candidate c on e.cand_id = c.cand_id " +
-		"group by exp_amount " +
-		"order by exp_amount desc " +
-		"limit 1")
-
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	if rows.Next() {
-		var candidate CandidateAmount
-		err = rows.Scan(&candidate.EntityName, &candidate.Amount, &candidate.Year,
-			&candidate.ID, &candidate.FirstName, &candidate.LastName)
-		if err == nil {
-			return &candidate, nil
-		}
-	}
-	return nil, nil
-}
-
-// GetMostPaidAnyYear returns the candidate who was paid the most in any year
-func GetMostPaidAnyYear(db *sql.DB) (*CandidateAmount, error) {
-	rows, err := db.Query("select con_name, con_amount, election_year " +
-		" from contributes " +
-		" group by con_amount " +
-		" order by con_amount desc " +
-		" limit 1")
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	if rows.Next() {
-		var contributes CandidateAmount
-		err = rows.Scan(&contributes.EntityName, &contributes.Amount, &contributes.Year)
-		if err == nil {
-			return &contributes, nil
-		}
-	}
-	return nil, nil
-}
-
 // GetCandidateContributionsForEachYear attempts to find the amount of
 // total contributions a candidate received in any year
 func GetCandidateContributionsForEachYear(db *sql.DB, candID string) (
