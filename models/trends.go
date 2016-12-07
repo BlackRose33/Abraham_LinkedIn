@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-//GetMostPaid asdfjnaoifjnoij
+//GetMostPaid gets most paid candidate of all time
 func GetMostPaid(db *sql.DB) (*CandidateAmount, error) {
 	rows, err := db.Query("SELECT c2.cand_first, c2.cand_last, c1.election_year," +
 		" c1.cand_id, c1.office_code, SUM(con_amount) amt FROM contributes c," +
@@ -32,7 +32,7 @@ func GetMostPaid(db *sql.DB) (*CandidateAmount, error) {
 	return nil, nil
 }
 
-// GetBiggestSpender asdfasdfoajidsfoij
+// GetBiggestSpender biggest spender of all time
 func GetBiggestSpender(db *sql.DB) (*CandidateAmount, error) {
 	rows, err := db.Query("SELECT c2.cand_first, c2.cand_last, c1.election_year," +
 		" c1.cand_id, c1.office_code, SUM(exp_amount) amt FROM expenditures e," +
@@ -58,7 +58,7 @@ func GetBiggestSpender(db *sql.DB) (*CandidateAmount, error) {
 	return nil, nil
 }
 
-// GetBiggestContributor asdfjasdfojpoij
+// GetBiggestContributor gets largest contributor of all time
 func GetBiggestContributor(db *sql.DB) (*Contributor, error) {
 
 	rows, err := db.Query("SELECT c1.con_name, c1.election_year, SUM(c1.con_amount)" +
@@ -83,13 +83,13 @@ func GetBiggestContributor(db *sql.DB) (*Contributor, error) {
 	return nil, nil
 }
 
-//Trend asdfjanodsfij
+//Trend struct
 type Trend struct {
 	Year   int
 	Amount float64
 }
 
-// GetExpenditureChange aidsfjnasdfoijn
+// GetExpenditureChange gets change in expenditure over the years
 func GetExpenditureChange(db *sql.DB) ([]Trend, error) {
 	rows, err := db.Query("SELECT election_year, AVG(exp_amount) amt " +
 		"FROM expenditures GROUP BY election_year ORDER BY election_year ASC;")
@@ -112,7 +112,7 @@ func GetExpenditureChange(db *sql.DB) ([]Trend, error) {
 	return amounts, nil
 }
 
-// GetContributionChange asdfadsfoij
+// GetContributionChange gets change in contributions over the years
 func GetContributionChange(db *sql.DB) ([]Trend, error) {
 	rows, err := db.Query("SELECT election_year, AVG(con_amount) amt " +
 		"FROM contributes WHERE sched <> 'M' GROUP BY election_year " +
@@ -264,7 +264,7 @@ type StringCount struct {
 	Amount float64
 }
 
-// GetMostCommonOccupations adsfiasf
+// GetMostCommonOccupations gets most common occupation for contributors
 func GetMostCommonOccupations(db *sql.DB) ([]StringCount, error) {
 	rows, err := db.Query(`SELECT occupation, COUNT(occupation), AVG(con_amount)
 		FROM (SELECT occupation, con_amount FROM contributes GROUP BY con_name)
@@ -289,7 +289,7 @@ func GetMostCommonOccupations(db *sql.DB) ([]StringCount, error) {
 	return res, nil
 }
 
-// GetHighestContribOccupations adsfiasf
+// GetHighestContribOccupations gets occupation for highest contributor
 func GetHighestContribOccupations(db *sql.DB) ([]StringCount, error) {
 	rows, err := db.Query(`SELECT occupation, COUNT(occupation), AVG(con_amount)
 		FROM (SELECT occupation, con_amount FROM contributes GROUP BY con_name)

@@ -11,12 +11,14 @@ import (
 func GetTemplates() map[string]*template.Template {
 	templates := make(map[string]*template.Template)
 
+	// Main pages
 	templates["home#index"] = loadTemplate("views/index.html")
 	templates["layouts#CandInfo"] = loadTemplate("views/layouts/CandInfo.html")
 	templates["layouts#HighSpender"] = loadTemplate("views/layouts/HighSpender.html")
 	templates["layouts#MostPaid"] = loadTemplate("views/layouts/MostPaid.html")
 	templates["layouts#Graphs"] = loadTemplate("views/layouts/Graphs.html")
 
+	// Individual trends
 	templates["trends#index"] = loadTrendsTemplate("views/trends/index.html")
 	templates["trends#HighSpender"] = loadTrendsTemplate("views/trends/HighSpender.html")
 	templates["trends#HighContrib"] = loadTrendsTemplate("views/trends/HighContrib.html")

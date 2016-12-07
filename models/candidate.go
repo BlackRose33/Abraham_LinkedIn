@@ -91,7 +91,8 @@ func GetCandidateContributionsForEachYear(db *sql.DB, candID string) (
 	return amounts, nil
 }
 
-// GetHighestSpenderByPositionForYear ecnj eroiubhcriuqbherioucuebwcriuqriu
+// GetHighestSpenderByPositionForYear returns the highest spenders for each
+// position for each year
 func GetHighestSpenderByPositionForYear(db *sql.DB, year int) ([]CandidateAmount,
 	error) {
 
@@ -123,7 +124,8 @@ func GetHighestSpenderByPositionForYear(db *sql.DB, year int) ([]CandidateAmount
 	return amounts, nil
 }
 
-// GetHighestPaidByPositionForYear hrinachunarih
+// GetHighestPaidByPositionForYear returns the most paid candidates for each
+// position for each year
 func GetHighestPaidByPositionForYear(db *sql.DB, year int) ([]CandidateAmount,
 	error) {
 
@@ -296,7 +298,7 @@ type CandidateCFPData struct {
 	AmountMatched  float64
 }
 
-// GetCandCFPData asdfiauhdfiaeu
+// GetCandCFPData returns information regarding money the candidate recieves
 func GetCandCFPData(db *sql.DB, candID string) (*CandidateCFPData, error) {
 	rows, err := db.Query(`SELECT c1.cand_first, c1.cand_last, c1.cand_class,
 		sum(c2.match_amt) from candidate c1, contributes c2 WHERE c1.cand_id =

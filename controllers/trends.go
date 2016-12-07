@@ -7,6 +7,7 @@ import (
 
 var trendFunctions map[string]http.Handler
 
+// Maps handler functions for trends
 func initTrendFunctions() {
 	trendFunctions = map[string]http.Handler{
 		"":             http.HandlerFunc(TrendsIndex),
@@ -39,14 +40,14 @@ func Trends(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// TrendsIndex handles /trends/#queryName
+// TrendsIndex handles /trends/
 func TrendsIndex(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
 	RenderView(w, "trends#index", viewData)
 }
 
-//ExpChange handles /trends/#queryName
+// ExpChange handles /trends/ExpChange
 func ExpChange(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
@@ -61,7 +62,7 @@ func ExpChange(w http.ResponseWriter, r *http.Request) {
 	RenderView(w, "trends#ExpChange", viewData)
 }
 
-//ConChange handles /trends/#queryName
+//ConChange handles /trends/ConChange
 func ConChange(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
@@ -76,7 +77,7 @@ func ConChange(w http.ResponseWriter, r *http.Request) {
 	RenderView(w, "trends#ConChange", viewData)
 }
 
-//HighestSpender handles /trends/#queryName
+//HighestSpender handles /trends/HighestSpender
 func HighestSpender(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
@@ -91,7 +92,7 @@ func HighestSpender(w http.ResponseWriter, r *http.Request) {
 	RenderView(w, "trends#HighSpender", viewData)
 }
 
-//HighestContrib handles /trends/#queryName
+//HighestContrib handles /trends/HighestContrib
 func HighestContrib(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
@@ -106,7 +107,7 @@ func HighestContrib(w http.ResponseWriter, r *http.Request) {
 	RenderView(w, "trends#HighContrib", viewData)
 }
 
-//Mostpaid handles /trends/#queryName
+//Mostpaid handles /trends/Mostpaid
 func Mostpaid(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
@@ -163,7 +164,7 @@ func Refunds(w http.ResponseWriter, r *http.Request) {
 	RenderView(w, "trends#refunds", viewData)
 }
 
-// AmtExpln asdfadsf
+// AmtExpln handles trends/amtExpln
 func AmtExpln(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
@@ -177,7 +178,7 @@ func AmtExpln(w http.ResponseWriter, r *http.Request) {
 	RenderView(w, "trends#amtExpln", viewData)
 }
 
-// CFPTrend asdfadsfasdf
+// CFPTrend handles trends/cfptrend
 func CFPTrend(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 
@@ -191,7 +192,7 @@ func CFPTrend(w http.ResponseWriter, r *http.Request) {
 	RenderView(w, "trends#cfptrend", viewData)
 }
 
-// AvgCFPTrend asdfadsfasdf
+// AvgCFPTrend handles trends/Avgcfptrend
 func AvgCFPTrend(w http.ResponseWriter, r *http.Request) {
 	viewData := BaseViewData(w, r)
 

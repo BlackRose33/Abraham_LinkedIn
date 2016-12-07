@@ -13,7 +13,7 @@ type ExplanationCount struct {
 	Amount      float64
 }
 
-// GetExpensiveExplanations asdfasdfajodsin
+// GetExpensiveExplanations .
 func GetExpensiveExplanations(db *sql.DB) ([]ExplanationCount, error) {
 	rows, err := db.Query("SELECT explanation, COUNT(1), SUM(exp_amount) amt " +
 		"FROM expenditures WHERE sched <> 'L' GROUP BY explanation HAVING " +

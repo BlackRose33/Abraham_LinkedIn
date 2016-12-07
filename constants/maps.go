@@ -3,7 +3,7 @@ package constants
 // OfficeNames maps office codes to names
 var OfficeNames map[int]string
 
-// BaseInitialization asdfnpaerjna ;oie
+// BaseInitialization maps office positions to list
 func BaseInitialization() {
 	OfficeNames = map[int]string{
 		1: "Mayor",

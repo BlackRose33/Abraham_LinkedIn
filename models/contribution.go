@@ -246,7 +246,8 @@ type DoorPrize struct {
 	Amount float64
 }
 
-// GetTopDoorPrizesGiven ahnreaiweorjno
+// GetTopDoorPrizesGiven has information about the top door prizes a candidate
+// gives
 func GetTopDoorPrizesGiven(db *sql.DB, candID string) ([]DoorPrize, error) {
 	rows, err := db.Query("SELECT con_name, sum(con_amount) FROM contributes "+
 		"WHERE sched = 'd' AND cand_id = ? GROUP BY con_name ORDER BY sum(con_amount) "+
@@ -269,7 +270,8 @@ func GetTopDoorPrizesGiven(db *sql.DB, candID string) ([]DoorPrize, error) {
 	return prizes, nil
 }
 
-// GetTopDoorPrizesPurchased ahnreaiweorjno
+// GetTopDoorPrizesPurchased has information about the top door prizes a
+// candidate purchases
 func GetTopDoorPrizesPurchased(db *sql.DB, candID string) ([]DoorPrize, error) {
 	rows, err := db.Query("SELECT exp_name, sum(exp_amount) FROM expenditures "+
 		"WHERE sched = 'd' AND cand_id = ? GROUP BY exp_name ORDER BY sum(exp_amount) "+
